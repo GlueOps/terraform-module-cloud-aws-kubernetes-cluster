@@ -1,4 +1,23 @@
-<!-- BEGIN_TF_DOCS -->
+# terraform-module-cloud-aws-kubernetes-cluster
+
+This Terraform module deploys everything you need in AWS to get a kubernetes cluster up and running. This repo should be used in the context of deploying with an [admiral](https://github.com/glueops/admiral)
+
+## Prerequisites
+
+### AWS Account Setup
+
+1. Create a **new** AWS account underneath your existing AWS Organization
+2. Request via AWS Support or your account representative from AWS that they "activate" your account. This can take up to 3 days to finish activating.
+3. Once activated, within your sub account create an IAM user/key with "Administrator Access". **No Console access is required for this user.**
+
+4. Pick a region and then set your environment variables in the terminal you will be using for execution. The example below uses `us-west-2`
+
+```bash
+export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXXX
+export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXXXX
+export AWS_DEFAULT_REGION=us-west-2
+```
+
 ## Requirements
 
 | Name | Version |
@@ -33,4 +52,3 @@ No resources.
 ## Outputs
 
 No outputs.
-<!-- END_TF_DOCS -->
