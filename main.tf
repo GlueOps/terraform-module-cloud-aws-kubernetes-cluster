@@ -17,7 +17,7 @@ variable "eks_node_group" {
     max_size       = number
   })
   default = {
-    instance_types = ["t3a.medium"]
+    instance_types = ["t3a.large"]
     desired_size   = 3
     min_size       = 3
     max_size       = 4
