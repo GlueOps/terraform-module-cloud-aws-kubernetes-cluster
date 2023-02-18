@@ -6,7 +6,7 @@ variable "region" {
 variable "vpc_cidr_block" {
   type        = string
   description = "The CIDR block for the VPC"
-  default     = "10.65.0.0./16"
+  default     = "10.65.0.0/16"
 }
 
 variable "eks_node_group" {
@@ -17,7 +17,7 @@ variable "eks_node_group" {
     max_size       = number
   })
   default = {
-    instance_types = ["t3a.large"]
+    instance_types = ["t3a.medium"]
     desired_size   = 3
     min_size       = 3
     max_size       = 4
