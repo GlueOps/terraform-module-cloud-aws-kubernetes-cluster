@@ -21,6 +21,32 @@ export AWS_DEFAULT_REGION=us-west-2
 
 5. Save the `export` statements above in a `.env` file and then source it.
 
+## Terraform Deployment
+
+### Configuration
+
+Create a `captain_configuration.tfvars` configuration file to deploy Kubernetes.
+A reasonable starting configuration block:
+
+```hcl
+kubernetes_cluster_configurations = {
+eks_node_group = {
+  "desired_size": 3,
+  "instance_types": [
+    "t3a.large"
+  ],
+  "max_size": 4,
+  "min_size": 3
+}
+
+vpc_cidr_block = "10.65.0.0/16"
+
+region = "us-west-2"
+}
+```
+
+You may update `region` if desired.
+
 ## Requirements
 
 | Name | Version |
@@ -58,7 +84,7 @@ export AWS_DEFAULT_REGION=us-west-2
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_eks_node_group"></a> [eks\_node\_group](#input\_eks\_node\_group) | n/a | <pre>object({<br>    instance_types = list(string)<br>    desired_size   = number<br>    min_size       = number<br>    max_size       = number<br>  })</pre> | <pre>{<br>  "desired_size": 3,<br>  "instance_types": [<br>    "t3a.medium"<br>  ],<br>  "max_size": 4,<br>  "min_size": 3<br>}</pre> | no |
+| <a name="input_eks_node_group"></a> [eks\_node\_group](#input\_eks\_node\_group) | n/a | <pre>object({<br>    instance_types = list(string)<br>    desired_size   = number<br>    min_size       = number<br>    max_size       = number<br>  })</pre> | <pre>{<br>  "desired_size": 3,<br>  "instance_types": [<br>    "t3a.large"<br>  ],<br>  "max_size": 4,<br>  "min_size": 3<br>}</pre> | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
 | <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0/16"` | no |
 
