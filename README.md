@@ -25,11 +25,14 @@ export AWS_DEFAULT_REGION=us-west-2
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.48.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.55.0 |
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.55.0 |
+| <a name="provider_tls"></a> [tls](#provider\_tls) | n/a |
 
 ## Modules
 
@@ -42,15 +45,22 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_eks_addon.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/eks_addon) | resource |
+| [aws_iam_role.eks_addon_ebs_csi_role](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_policy_document.eks_assume_addon_role](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/data-sources/iam_policy_document) | data source |
+| [tls_certificate.cluster_addons](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_eks_node_group"></a> [eks\_node\_group](#input\_eks\_node\_group) | n/a | <pre>object({<br>    instance_types = list(string)<br>    desired_size   = number<br>    min_size       = number<br>    max_size       = number<br>  })</pre> | <pre>{<br>  "desired_size": 3,<br>  "instance_types": [<br>    "t3a.large"<br>  ],<br>  "max_size": 4,<br>  "min_size": 3<br>}</pre> | no |
+| <a name="input_eks_node_group"></a> [eks\_node\_group](#input\_eks\_node\_group) | n/a | <pre>object({<br>    instance_types = list(string)<br>    desired_size   = number<br>    min_size       = number<br>    max_size       = number<br>  })</pre> | <pre>{<br>  "desired_size": 3,<br>  "instance_types": [<br>    "t3a.medium"<br>  ],<br>  "max_size": 4,<br>  "min_size": 3<br>}</pre> | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
-| <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0./16"` | no |
+| <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0/16"` | no |
 
 ## Outputs
 
