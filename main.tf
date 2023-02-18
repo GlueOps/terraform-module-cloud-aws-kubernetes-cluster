@@ -140,7 +140,7 @@ resource "aws_iam_role" "eks_addon_ebs_csi_role" {
   name               = "AmazonEKS_EBS_CSI_DriverRole"
 }
 
-resource "aws_iam_role_policy_attachment" "attachment" {
+resource "aws_iam_role_policy_attachment" "ebs_csi" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEBSCSIDriverPolicy"
   role       = aws_iam_role.eks_addon_ebs_csi_role.name
 }
@@ -151,4 +151,5 @@ resource "aws_eks_addon" "ebs_csi" {
   addon_version     = "v1.15.0-eksbuild.1"
   resolve_conflicts = "OVERWRITE"
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
+  depends_on = [aws_iam_role_policy_attachment.ebs_csi]
 }
