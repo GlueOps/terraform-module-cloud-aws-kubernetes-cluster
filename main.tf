@@ -6,7 +6,7 @@ variable "region" {
 variable "vpc_cidr_block" {
   type        = string
   description = "The CIDR block for the VPC"
-  default     = "10.65.0.0./16"
+  default     = "10.65.0.0/16"
 }
 
 variable "eks_node_group" {
@@ -17,7 +17,7 @@ variable "eks_node_group" {
     max_size       = number
   })
   default = {
-    instance_types = ["t3a.large"]
+    instance_types = ["t3a.medium"]
     desired_size   = 3
     min_size       = 3
     max_size       = 4
@@ -30,7 +30,7 @@ provider "aws" {
 
 locals {
   eks_cluster = {
-    cluster_version = "1.22"
+    cluster_version = "1.24"
     region          = var.region
   }
   vpc = {
@@ -101,6 +101,53 @@ module "kubernetes" {
   kubernetes_version    = local.eks_cluster.cluster_version
 }
 
+data "tls_certificate" "cluster_addons" {
+  url = module.kubernetes.eks_cluster_identity_oidc_issuer
+}
+  
+data "aws_iam_openid_connect_provider" "provider" {
+  arn = module.kubernetes.eks_cluster_identity_oidc_issuer_arn
+}
+  
+data "aws_iam_policy_document" "eks_assume_addon_role" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+    principals {
+      identifiers = [data.aws_iam_openid_connect_provider.provider.arn]
+      type        = "Federated"
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(data.aws_iam_openid_connect_provider.provider.url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(data.aws_iam_openid_connect_provider.provider.url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
 
 
+  }
+}
 
+resource "aws_iam_role" "eks_addon_ebs_csi_role" {
+  assume_role_policy = data.aws_iam_policy_document.eks_assume_addon_role.json
+  name               = "AmazonEKS_EBS_CSI_DriverRole"
+}
+
+resource "aws_iam_role_policy_attachment" "ebs_csi" {
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
+  role       = aws_iam_role.eks_addon_ebs_csi_role.name
+}
+
+resource "aws_eks_addon" "ebs_csi" {
+  cluster_name      = module.kubernetes.eks_cluster_id
+  addon_name        = "aws-ebs-csi-driver"
+  addon_version     = "v1.15.0-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
+  service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
+  depends_on = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
+}
