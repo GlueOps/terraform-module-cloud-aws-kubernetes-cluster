@@ -30,7 +30,7 @@ provider "aws" {
 
 locals {
   eks_cluster = {
-    cluster_version = "1.22"
+    cluster_version = "1.24"
     region          = var.region
   }
   vpc = {
@@ -101,6 +101,53 @@ module "kubernetes" {
   kubernetes_version    = local.eks_cluster.cluster_version
 }
 
+data "tls_certificate" "cluster_addons" {
+  url = module.kubernetes.eks_cluster_identity_oidc_issuer
+}
+
+resource "aws_iam_openid_connect_provider" "provider" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = [data.tls_certificate.cluster_addons.certificates[0].sha1_fingerprint]
+  url             = module.kubernetes.eks_cluster_identity_oidc_issuer
+}
+
+data "aws_iam_policy_document" "eks_assume_addon_role" {
+  statement {
+    actions = ["sts:AssumeRoleWithWebIdentity"]
+    effect  = "Allow"
+    principals {
+      identifiers = [aws_iam_openid_connect_provider.provider.arn]
+      type        = "Federated"
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.provider.url, "https://", "")}:sub"
+      values   = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "${replace(aws_iam_openid_connect_provider.provider.url, "https://", "")}:aud"
+      values   = ["sts.amazonaws.com"]
+    }
 
 
+  }
+}
 
+resource "aws_iam_role" "eks_addon_ebs_csi_role" {
+  assume_role_policy = data.aws_iam_policy_document.eks_assume_addon_role.json
+  name               = "AmazonEKS_EBS_CSI_DriverRole"
+}
+
+resource "aws_iam_role_policy_attachment" "attachment" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEBSCSIDriverPolicy"
+  role       = aws_iam_role.eks_addon_role.name
+}
+
+resource "aws_eks_addon" "ebs_csi" {
+  cluster_name      = module.kubernetes.eks_cluster_id
+  addon_name        = "aws-ebs-csi-driver"
+  addon_version     = "v1.15.0-eksbuild.1"
+  resolve_conflicts = "OVERWRITE"
+}
