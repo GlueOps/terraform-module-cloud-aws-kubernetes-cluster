@@ -48,9 +48,9 @@ export AWS_DEFAULT_REGION=us-west-2
 | Name | Type |
 |------|------|
 | [aws_eks_addon.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/eks_addon) | resource |
-| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_openid_connect_provider) | resource |
 | [aws_iam_role.eks_addon_ebs_csi_role](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/data-sources/iam_openid_connect_provider) | data source |
 | [aws_iam_policy_document.eks_assume_addon_role](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/data-sources/iam_policy_document) | data source |
 | [tls_certificate.cluster_addons](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate) | data source |
 
