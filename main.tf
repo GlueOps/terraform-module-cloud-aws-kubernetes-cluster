@@ -104,12 +104,6 @@ module "kubernetes" {
 data "tls_certificate" "cluster_addons" {
   url = module.kubernetes.eks_cluster_identity_oidc_issuer
 }
-
-# resource "aws_iam_openid_connect_provider" "provider" {
-#   client_id_list  = ["sts.amazonaws.com"]
-#   thumbprint_list = [data.tls_certificate.cluster_addons.certificates[0].sha1_fingerprint]
-#   url             = module.kubernetes.eks_cluster_identity_oidc_issuer
-# }
   
 data "aws_iam_openid_connect_provider" "provider" {
   arn = module.kubernetes.eks_cluster_identity_oidc_issuer_arn
