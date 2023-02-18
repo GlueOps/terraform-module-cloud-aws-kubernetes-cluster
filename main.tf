@@ -105,29 +105,33 @@ data "tls_certificate" "cluster_addons" {
   url = module.kubernetes.eks_cluster_identity_oidc_issuer
 }
 
-resource "aws_iam_openid_connect_provider" "provider" {
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = [data.tls_certificate.cluster_addons.certificates[0].sha1_fingerprint]
-  url             = module.kubernetes.eks_cluster_identity_oidc_issuer
+# resource "aws_iam_openid_connect_provider" "provider" {
+#   client_id_list  = ["sts.amazonaws.com"]
+#   thumbprint_list = [data.tls_certificate.cluster_addons.certificates[0].sha1_fingerprint]
+#   url             = module.kubernetes.eks_cluster_identity_oidc_issuer
+# }
+  
+data "aws_iam_openid_connect_provider" "provider" {
+  arn = module.kubernetes.eks_cluster_identity_oidc_issuer_arn
 }
-
+  
 data "aws_iam_policy_document" "eks_assume_addon_role" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
     principals {
-      identifiers = [aws_iam_openid_connect_provider.provider.arn]
+      identifiers = [data.aws_iam_openid_connect_provider.provider.arn]
       type        = "Federated"
     }
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.provider.url, "https://", "")}:sub"
+      variable = "${replace(data.aws_iam_openid_connect_provider.provider.url, "https://", "")}:sub"
       values   = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
     }
     condition {
       test     = "StringEquals"
-      variable = "${replace(aws_iam_openid_connect_provider.provider.url, "https://", "")}:aud"
+      variable = "${replace(data.aws_iam_openid_connect_provider.provider.url, "https://", "")}:aud"
       values   = ["sts.amazonaws.com"]
     }
 
