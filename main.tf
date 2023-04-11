@@ -26,7 +26,7 @@ variable "node_pools" {
     name          = string
   }))
   default = [{
-    ami_image_id   = "amazon-eks-node-1.24-v20230406"
+    ami_image_id  = "amazon-eks-node-1.24-v20230406"
     node_count    = 1
     instance_type = "t3a.large"
     name          = "default-pool"
