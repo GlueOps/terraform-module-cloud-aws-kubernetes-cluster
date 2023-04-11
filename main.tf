@@ -23,9 +23,10 @@ variable "node_pools" {
     instance_type = string
     ami_image_id  = string
     spot          = bool
+    name          = string
   }))
   default = [{
-    gke_version   = "1.24.10-gke.2300"
+    ami_image_id   = "amazon-eks-node-1.24-v20230406"
     node_count    = 1
     instance_type = "t3a.large"
     name          = "default-pool"
