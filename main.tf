@@ -9,19 +9,38 @@ variable "vpc_cidr_block" {
   default     = "10.65.0.0/16"
 }
 
-variable "eks_node_group" {
-  type = object({
-    instance_types = list(string)
-    desired_size   = number
-    min_size       = number
-    max_size       = number
-  })
-  default = {
-    instance_types = ["t3a.large"]
-    desired_size   = 3
-    min_size       = 3
-    max_size       = 4
-  }
+variable "availability_zones" {
+  type        = list(string)
+  description = "The availability zones to deploy into"
+  default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
+
+}
+
+variable "node_pools" {
+  type = list(object({
+    name          = string
+    node_count    = number
+    instance_type = string
+    ami_image_id  = string
+    spot          = bool
+  }))
+  default = [{
+    gke_version   = "1.24.10-gke.2300"
+    node_count    = 1
+    instance_type = "t3a.large"
+    name          = "default-pool"
+    spot          = false
+  }]
+  # description = <<-DESC
+  # node pool configurations:
+  #   - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
+  #   - node_count (number): number of nodes to create in the node pool.
+  #   - machine_type (string): Machine type to use for the nodes. ref: https://gcpinstances.doit-intl.com/
+  #   - disk_type (string): Disk type to use for the nodes. ref: https://cloud.google.com/compute/docs/disks
+  #   - disk_size_gb (number): Disk size in GB for the nodes.
+  #   - gke_version (string): GKE version to use for the nodes. ref: https://cloud.google.com/kubernetes-engine/docs/release-notes
+  #   - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
+  # DESC
 }
 
 provider "aws" {
@@ -37,7 +56,6 @@ locals {
     cidr_block = var.vpc_cidr_block
   }
 
-  eks_node_group = var.eks_node_group
 }
 
 module "vpc" {
@@ -61,28 +79,26 @@ module "subnets" {
   name                    = "captain"
   private_subnets_enabled = false
   public_subnets_enabled  = true
-  availability_zones      = ["us-west-2a", "us-west-2b", "us-west-2c"]
+  availability_zones      = var.availability_zones
 }
 
 
-
-
 module "node_pool" {
-  source = "cloudposse/eks-node-group/aws"
+  for_each = var.node_pools
+  source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
   version = "2.6.0"
 
-  instance_types = local.eks_node_group.instance_types
+  instance_types = [each.value.instance_type]
   subnet_ids     = module.subnets.public_subnet_ids
-  #health_check_type                  = var.health_check_type
-  desired_size = local.eks_node_group.desired_size
-  min_size     = local.eks_node_group.min_size
-  max_size     = local.eks_node_group.max_size
-  cluster_name = module.kubernetes.eks_cluster_id
+  desired_size   = each.value.node_count
+  min_size       = each.value.node_count
+  max_size       = each.value.node_count + 1
+  cluster_name   = module.kubernetes.eks_cluster_id
+  capacity_type  = each.value.spot ? "SPOT" : "ON_DEMAND"
 
-  # Enable the Kubernetes cluster auto-scaler to find the auto-scaling group
-  cluster_autoscaler_enabled = true
-  name                       = "captain"
+  cluster_autoscaler_enabled = false
+  name                       = each.value.name
   # Ensure the cluster is fully created before trying to add the node group
   module_depends_on = module.kubernetes.kubernetes_config_map_id
 }
@@ -104,11 +120,11 @@ module "kubernetes" {
 data "tls_certificate" "cluster_addons" {
   url = module.kubernetes.eks_cluster_identity_oidc_issuer
 }
-  
+
 data "aws_iam_openid_connect_provider" "provider" {
   arn = module.kubernetes.eks_cluster_identity_oidc_issuer_arn
 }
-  
+
 data "aws_iam_policy_document" "eks_assume_addon_role" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -144,10 +160,10 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 }
 
 resource "aws_eks_addon" "ebs_csi" {
-  cluster_name      = module.kubernetes.eks_cluster_id
-  addon_name        = "aws-ebs-csi-driver"
-  addon_version     = "v1.15.0-eksbuild.1"
-  resolve_conflicts = "OVERWRITE"
+  cluster_name             = module.kubernetes.eks_cluster_id
+  addon_name               = "aws-ebs-csi-driver"
+  addon_version            = "v1.15.0-eksbuild.1"
+  resolve_conflicts        = "OVERWRITE"
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
-  depends_on = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
+  depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
 }
