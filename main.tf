@@ -17,7 +17,7 @@ variable "availability_zones" {
 }
 
 variable "node_pools" {
-  type = list(object({
+  type = map(object({
     name          = string
     node_count    = number
     instance_type = string
@@ -85,7 +85,7 @@ module "subnets" {
 
 
 module "node_pool" {
-  for_each = var.node_pools
+  for_each = { for np in var.node_pools : np.name => np }
   source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
   version = "2.6.0"
