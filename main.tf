@@ -50,8 +50,14 @@ variable "node_pools" {
   # DESC
 }
 
+variable "iam_role_to_assume" {
+  type        = string
+  description = "The name of the IAM role to assume"
+}
+
 provider "aws" {
   region = var.region
+  role   = var.iam_role_to_assume
 }
 
 locals {
