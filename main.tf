@@ -17,7 +17,7 @@ variable "availability_zones" {
 }
 
 variable "node_pools" {
-  type = map(object({
+  type = list(object({
     name          = string
     node_count    = number
     instance_type = string
