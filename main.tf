@@ -16,6 +16,12 @@ variable "availability_zones" {
 
 }
 
+variable "eks_version" {
+  type        = string
+  description = "The version of EKS to deploy"
+  default     = "1.24"
+}
+
 variable "node_pools" {
   type = list(object({
     name          = string
@@ -49,10 +55,6 @@ provider "aws" {
 }
 
 locals {
-  eks_cluster = {
-    cluster_version = "1.24"
-    region          = var.region
-  }
   vpc = {
     cidr_block = var.vpc_cidr_block
   }
@@ -109,13 +111,13 @@ module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
   version = "2.5.0"
 
-  region     = local.eks_cluster.region
+  region     = var.region
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.subnets.public_subnet_ids
 
   oidc_provider_enabled = true
   name                  = "captain"
-  kubernetes_version    = local.eks_cluster.cluster_version
+  kubernetes_version    = var.eks_version
 }
 
 data "tls_certificate" "cluster_addons" {
