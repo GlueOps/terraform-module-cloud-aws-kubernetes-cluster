@@ -56,8 +56,8 @@ variable "iam_role_to_assume" {
 }
 
 provider "aws" {
-  region = var.region
-  role   = var.iam_role_to_assume
+  region   = var.region
+  role_arn = var.iam_role_to_assume
 }
 
 locals {
