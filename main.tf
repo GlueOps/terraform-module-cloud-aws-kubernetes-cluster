@@ -123,9 +123,10 @@ module "kubernetes" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.subnets.public_subnet_ids
 
-  oidc_provider_enabled = true
-  name                  = "captain"
-  kubernetes_version    = var.eks_version
+  oidc_provider_enabled     = true
+  name                      = "captain"
+  kubernetes_version        = var.eks_version
+  apply_config_map_aws_auth = false
 }
 
 data "tls_certificate" "cluster_addons" {
