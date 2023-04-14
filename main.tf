@@ -140,10 +140,6 @@ module "kubernetes" {
   }
 }
 
-data "tls_certificate" "cluster_addons" {
-  url = module.kubernetes.eks_cluster_identity_oidc_issuer
-}
-
 data "aws_iam_openid_connect_provider" "provider" {
   arn = module.kubernetes.eks_cluster_identity_oidc_issuer_arn
 }
