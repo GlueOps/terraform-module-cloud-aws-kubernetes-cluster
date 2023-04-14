@@ -134,7 +134,7 @@ module "kubernetes" {
   apply_config_map_aws_auth = false
   addons = {
     addon_name               = "aws-ebs-csi-driver"
-    addon_version            = "v1.15.0-eksbuild.1"
+    addon_version            = var.csi_driver_version
     resolve_conflicts        = "OVERWRITE"
     service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
   }
