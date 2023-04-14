@@ -35,6 +35,7 @@ variable "node_pools" {
     ami_image_id  = string
     spot          = bool
     name          = string
+    disk_size_gb  = number
   }))
   default = [{
     ami_image_id  = "amazon-eks-node-1.24-v20230406"
@@ -42,6 +43,7 @@ variable "node_pools" {
     instance_type = "t3a.large"
     name          = "default-pool"
     spot          = false
+    disk_size_gb  = 20
   }]
   # description = <<-DESC
   # node pool configurations:
@@ -117,6 +119,15 @@ module "node_pool" {
   name                       = each.value.name
   # Ensure the cluster is fully created before trying to add the node group
   module_depends_on = module.kubernetes.kubernetes_config_map_id
+  block_device_mappings = [
+    {
+      "delete_on_termination" : true,
+      "device_name" : "/dev/xvda",
+      "encrypted" : true,
+      "volume_size" : each.value.disk_size_gb,
+      "volume_type" : "gp2"
+    }
+  ]
 }
 
 
