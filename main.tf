@@ -192,3 +192,26 @@ resource "aws_eks_addon" "ebs_csi" {
   depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
 }
 
+
+resource "aws_security_group" "captain" {
+  name        = "captain-sg"
+  description = "captain security group"
+}
+
+resource "aws_security_group_rule" "captain_ingress_all_private" {
+  type              = "ingress"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "-1"
+  cidr_blocks       = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+  security_group_id = aws_security_group.captain.id
+}
+
+resource "aws_security_group_rule" "captain_egress_all_ipv4" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 65535
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.captain.id
+}
