@@ -143,12 +143,6 @@ module "kubernetes" {
   name                      = "captain"
   kubernetes_version        = var.eks_version
   apply_config_map_aws_auth = false
-  addons = [{
-    addon_name               = "aws-ebs-csi-driver"
-    addon_version            = var.csi_driver_version
-    resolve_conflicts        = "OVERWRITE"
-    service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
-  }]
 }
 
 data "aws_iam_openid_connect_provider" "provider" {
@@ -189,12 +183,12 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
   role       = aws_iam_role.eks_addon_ebs_csi_role.name
 }
 
-# resource "aws_eks_addon" "ebs_csi" {
-#   cluster_name             = module.kubernetes.eks_cluster_id
-#   addon_name               = "aws-ebs-csi-driver"
-#   addon_version            = "v1.15.0-eksbuild.1"
-#   resolve_conflicts        = "OVERWRITE"
-#   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
-#   depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
-# }
+resource "aws_eks_addon" "ebs_csi" {
+  cluster_name             = module.kubernetes.eks_cluster_id
+  addon_name               = "aws-ebs-csi-driver"
+  addon_version            = var.csi_driver_version
+  resolve_conflicts        = "OVERWRITE"
+  service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
+  depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
+}
 
