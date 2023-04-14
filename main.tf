@@ -198,6 +198,7 @@ resource "aws_eks_addon" "ebs_csi" {
 resource "aws_security_group" "captain" {
   name        = "captain-sg"
   description = "captain security group"
+  vpc_id      = module.vpc.vpc_id
 }
 
 resource "aws_security_group_rule" "captain_ingress_all_private" {
