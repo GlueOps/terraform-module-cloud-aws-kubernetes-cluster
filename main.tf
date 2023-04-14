@@ -128,6 +128,7 @@ module "node_pool" {
       "volume_type" : "gp2"
     }
   ]
+  associated_security_group_ids = [aws_security_group.captain.id]
 }
 
 
@@ -139,10 +140,11 @@ module "kubernetes" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.subnets.public_subnet_ids
 
-  oidc_provider_enabled     = true
-  name                      = "captain"
-  kubernetes_version        = var.eks_version
-  apply_config_map_aws_auth = false
+  oidc_provider_enabled      = true
+  name                       = "captain"
+  kubernetes_version         = var.eks_version
+  apply_config_map_aws_auth  = false
+  allowed_security_group_ids = [aws_security_group.captain.id]
 }
 
 data "aws_iam_openid_connect_provider" "provider" {
@@ -214,4 +216,14 @@ resource "aws_security_group_rule" "captain_egress_all_ipv4" {
   protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.captain.id
+}
+
+resource "aws_security_group_rule" "allow_all_within_group" {
+  security_group_id = aws_security_group.captain.id
+
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1" # All protocols
+  source_security_group_id = aws_security_group.captain.id
 }
