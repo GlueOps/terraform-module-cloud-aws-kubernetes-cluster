@@ -105,7 +105,7 @@ module "node_pool" {
   for_each = { for np in var.node_pools : np.name => np }
   source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version = "2.6.0"
+  version = "2.9.0"
 
   instance_types = [each.value.instance_type]
   subnet_ids     = module.subnets.public_subnet_ids
@@ -133,7 +133,7 @@ module "node_pool" {
 
 module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
-  version = "2.9.0"
+  version = "2.6.0"
 
   region     = var.region
   vpc_id     = module.vpc.vpc_id
