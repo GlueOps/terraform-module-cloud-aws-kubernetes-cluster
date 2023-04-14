@@ -100,6 +100,20 @@ module "subnets" {
   availability_zones      = var.availability_zones
 }
 
+module "kubernetes" {
+  source  = "cloudposse/eks-cluster/aws"
+  version = "2.6.0"
+
+  region     = var.region
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.subnets.public_subnet_ids
+
+  oidc_provider_enabled      = true
+  name                       = "captain"
+  kubernetes_version         = var.eks_version
+  apply_config_map_aws_auth  = false
+  allowed_security_group_ids = [aws_security_group.captain.id]
+}
 
 module "node_pool" {
   for_each = { for np in var.node_pools : np.name => np }
@@ -129,22 +143,6 @@ module "node_pool" {
     }
   ]
   associated_security_group_ids = [aws_security_group.captain.id]
-}
-
-
-module "kubernetes" {
-  source  = "cloudposse/eks-cluster/aws"
-  version = "2.6.0"
-
-  region     = var.region
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.subnets.public_subnet_ids
-
-  oidc_provider_enabled      = true
-  name                       = "captain"
-  kubernetes_version         = var.eks_version
-  apply_config_map_aws_auth  = false
-  allowed_security_group_ids = [aws_security_group.captain.id]
 }
 
 data "aws_iam_openid_connect_provider" "provider" {
