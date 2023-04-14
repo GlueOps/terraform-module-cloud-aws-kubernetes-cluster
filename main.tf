@@ -133,7 +133,7 @@ module "node_pool" {
 
 module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
-  version = "2.5.0"
+  version = "2.6.0"
 
   region     = var.region
   vpc_id     = module.vpc.vpc_id
