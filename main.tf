@@ -132,12 +132,12 @@ module "kubernetes" {
   name                      = "captain"
   kubernetes_version        = var.eks_version
   apply_config_map_aws_auth = false
-  addons = {
+  addons = [{
     addon_name               = "aws-ebs-csi-driver"
     addon_version            = "${var.csi_driver_version}"
     resolve_conflicts        = "OVERWRITE"
     service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
-  }
+  }]
 }
 
 data "aws_iam_openid_connect_provider" "provider" {
