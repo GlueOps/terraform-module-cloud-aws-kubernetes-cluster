@@ -1,114 +1,64 @@
-variable "region" {
-  type        = string
-  description = "The AWS region to deploy into"
-}
 
-variable "vpc_cidr_block" {
-  type        = string
-  description = "The CIDR block for the VPC"
-  default     = "10.65.0.0/16"
-}
-
-variable "eks_node_group" {
-  type = object({
-    instance_types = list(string)
-    desired_size   = number
-    min_size       = number
-    max_size       = number
-  })
-  default = {
-    instance_types = ["t3a.large"]
-    desired_size   = 3
-    min_size       = 3
-    max_size       = 4
-  }
-}
 
 provider "aws" {
   region = var.region
-}
-
-locals {
-  eks_cluster = {
-    cluster_version = "1.24"
-    region          = var.region
+  assume_role {
+    role_arn = var.iam_role_to_assume
   }
-  vpc = {
-    cidr_block = var.vpc_cidr_block
-  }
-
-  eks_node_group = var.eks_node_group
-}
-
-module "vpc" {
-  source = "cloudposse/vpc/aws"
-  # Cloud Posse recommends pinning every module to a specific version
-  version                 = "2.0.0"
-  ipv4_primary_cidr_block = local.vpc.cidr_block
-  name                    = "captain"
 }
 
 
-module "subnets" {
-  source = "cloudposse/dynamic-subnets/aws"
-  # Cloud Posse recommends pinning every module to a specific version
-  version = "2.0.4"
-
-  vpc_id                  = module.vpc.vpc_id
-  igw_id                  = [module.vpc.igw_id]
-  nat_gateway_enabled     = false
-  nat_instance_enabled    = false
-  name                    = "captain"
-  private_subnets_enabled = false
-  public_subnets_enabled  = true
-  availability_zones      = ["us-west-2a", "us-west-2b", "us-west-2c"]
-}
-
-
-
-
-module "node_pool" {
-  source = "cloudposse/eks-node-group/aws"
-  # Cloud Posse recommends pinning every module to a specific version
-  version = "2.6.0"
-
-  instance_types = local.eks_node_group.instance_types
-  subnet_ids     = module.subnets.public_subnet_ids
-  #health_check_type                  = var.health_check_type
-  desired_size = local.eks_node_group.desired_size
-  min_size     = local.eks_node_group.min_size
-  max_size     = local.eks_node_group.max_size
-  cluster_name = module.kubernetes.eks_cluster_id
-
-  # Enable the Kubernetes cluster auto-scaler to find the auto-scaling group
-  cluster_autoscaler_enabled = true
-  name                       = "captain"
-  # Ensure the cluster is fully created before trying to add the node group
-  module_depends_on = module.kubernetes.kubernetes_config_map_id
-}
 
 
 module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
-  version = "2.5.0"
+  version = "2.6.0"
 
-  region     = local.eks_cluster.region
+  region     = var.region
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.subnets.public_subnet_ids
 
-  oidc_provider_enabled = true
-  name                  = "captain"
-  kubernetes_version    = local.eks_cluster.cluster_version
+  oidc_provider_enabled      = true
+  name                       = "captain"
+  kubernetes_version         = var.eks_version
+  apply_config_map_aws_auth  = false
+  allowed_security_group_ids = [aws_security_group.captain.id]
 }
 
-data "tls_certificate" "cluster_addons" {
-  url = module.kubernetes.eks_cluster_identity_oidc_issuer
+module "node_pool" {
+  for_each = { for np in var.node_pools : np.name => np }
+  source   = "cloudposse/eks-node-group/aws"
+  # Cloud Posse recommends pinning every module to a specific version
+  version = "2.9.0"
+
+  instance_types = [each.value.instance_type]
+  subnet_ids     = module.subnets.public_subnet_ids
+  desired_size   = each.value.node_count
+  min_size       = each.value.node_count
+  max_size       = each.value.node_count + 1
+  cluster_name   = module.kubernetes.eks_cluster_id
+  capacity_type  = each.value.spot ? "SPOT" : "ON_DEMAND"
+
+  cluster_autoscaler_enabled = false
+  name                       = each.value.name
+  # Ensure the cluster is fully created before trying to add the node group
+  module_depends_on = module.kubernetes.kubernetes_config_map_id
+  block_device_mappings = [
+    {
+      "delete_on_termination" : true,
+      "device_name" : "/dev/xvda",
+      "encrypted" : true,
+      "volume_size" : each.value.disk_size_gb,
+      "volume_type" : "gp2"
+    }
+  ]
+  associated_security_group_ids = [aws_security_group.captain.id]
 }
-  
+
 data "aws_iam_openid_connect_provider" "provider" {
   arn = module.kubernetes.eks_cluster_identity_oidc_issuer_arn
 }
-  
+
 data "aws_iam_policy_document" "eks_assume_addon_role" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -144,10 +94,12 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 }
 
 resource "aws_eks_addon" "ebs_csi" {
-  cluster_name      = module.kubernetes.eks_cluster_id
-  addon_name        = "aws-ebs-csi-driver"
-  addon_version     = "v1.15.0-eksbuild.1"
-  resolve_conflicts = "OVERWRITE"
+  cluster_name             = module.kubernetes.eks_cluster_id
+  addon_name               = "aws-ebs-csi-driver"
+  addon_version            = var.csi_driver_version
+  resolve_conflicts        = "OVERWRITE"
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
-  depends_on = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
+  depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
 }
+
+
