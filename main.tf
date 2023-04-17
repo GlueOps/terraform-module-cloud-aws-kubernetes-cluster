@@ -1,104 +1,11 @@
-variable "region" {
-  type        = string
-  description = "The AWS region to deploy into"
-}
 
-variable "csi_driver_version" {
-  type    = string
-  default = "v1.15.0-eksbuild.1"
-}
-
-variable "vpc_cidr_block" {
-  type        = string
-  description = "The CIDR block for the VPC"
-  default     = "10.65.0.0/16"
-}
-
-variable "availability_zones" {
-  type        = list(string)
-  description = "The availability zones to deploy into"
-  default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
-
-}
-
-variable "eks_version" {
-  type        = string
-  description = "The version of EKS to deploy"
-  default     = "1.24"
-}
-
-variable "node_pools" {
-  type = list(object({
-    name          = string
-    node_count    = number
-    instance_type = string
-    ami_image_id  = string
-    spot          = bool
-    name          = string
-    disk_size_gb  = number
-  }))
-  default = [{
-    ami_image_id  = "amazon-eks-node-1.24-v20230406"
-    node_count    = 1
-    instance_type = "t3a.large"
-    name          = "default-pool"
-    spot          = false
-    disk_size_gb  = 20
-  }]
-  # description = <<-DESC
-  # node pool configurations:
-  #   - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
-  #   - node_count (number): number of nodes to create in the node pool.
-  #   - machine_type (string): Machine type to use for the nodes. ref: https://gcpinstances.doit-intl.com/
-  #   - disk_type (string): Disk type to use for the nodes. ref: https://cloud.google.com/compute/docs/disks
-  #   - disk_size_gb (number): Disk size in GB for the nodes.
-  #   - gke_version (string): GKE version to use for the nodes. ref: https://cloud.google.com/kubernetes-engine/docs/release-notes
-  #   - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
-  # DESC
-}
-
-variable "iam_role_to_assume" {
-  type        = string
-  description = "The name of the IAM role to assume"
-}
 
 provider "aws" {
   region = var.region
-  assume_role {
-    role_arn = var.iam_role_to_assume
-  }
-}
-
-locals {
-  vpc = {
-    cidr_block = var.vpc_cidr_block
-  }
-
-}
-
-module "vpc" {
-  source = "cloudposse/vpc/aws"
-  # Cloud Posse recommends pinning every module to a specific version
-  version                 = "2.0.0"
-  ipv4_primary_cidr_block = local.vpc.cidr_block
-  name                    = "captain"
 }
 
 
-module "subnets" {
-  source = "cloudposse/dynamic-subnets/aws"
-  # Cloud Posse recommends pinning every module to a specific version
-  version = "2.0.4"
 
-  vpc_id                  = module.vpc.vpc_id
-  igw_id                  = [module.vpc.igw_id]
-  nat_gateway_enabled     = false
-  nat_instance_enabled    = false
-  name                    = "captain"
-  private_subnets_enabled = false
-  public_subnets_enabled  = true
-  availability_zones      = var.availability_zones
-}
 
 module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
@@ -193,36 +100,3 @@ resource "aws_eks_addon" "ebs_csi" {
 }
 
 
-resource "aws_security_group" "captain" {
-  name        = "captain-sg"
-  description = "captain security group"
-  vpc_id      = module.vpc.vpc_id
-}
-
-resource "aws_security_group_rule" "captain_ingress_all_private" {
-  type              = "ingress"
-  from_port         = 0
-  to_port           = 65535
-  protocol          = "-1"
-  cidr_blocks       = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
-  security_group_id = aws_security_group.captain.id
-}
-
-resource "aws_security_group_rule" "captain_egress_all_ipv4" {
-  type              = "egress"
-  from_port         = 0
-  to_port           = 65535
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.captain.id
-}
-
-resource "aws_security_group_rule" "allow_all_within_group" {
-  security_group_id = aws_security_group.captain.id
-
-  type                     = "ingress"
-  from_port                = 0
-  to_port                  = 0
-  protocol                 = "-1" # All protocols
-  source_security_group_id = aws_security_group.captain.id
-}
