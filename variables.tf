@@ -5,7 +5,7 @@ variable "region" {
 
 variable "csi_driver_version" {
   type    = string
-  default = "v1.15.0-eksbuild.1"
+  default = "v1.17.0-eksbuild.1"
 }
 
 variable "vpc_cidr_block" {
@@ -24,7 +24,7 @@ variable "availability_zones" {
 variable "eks_version" {
   type        = string
   description = "The version of EKS to deploy"
-  default     = "1.24"
+  default     = "1.26"
 }
 
 variable "node_pools" {
@@ -34,14 +34,13 @@ variable "node_pools" {
     instance_type = string
     ami_image_id  = string
     spot          = bool
-    name          = string
     disk_size_gb  = number
   }))
   default = [{
-    ami_image_id  = "amazon-eks-node-1.24-v20230406"
+    name          = "default-pool"
     node_count    = 1
     instance_type = "t3a.large"
-    name          = "default-pool"
+    ami_image_id  = "amazon-eks-node-1.24-v20230406"
     spot          = false
     disk_size_gb  = 20
   }]
