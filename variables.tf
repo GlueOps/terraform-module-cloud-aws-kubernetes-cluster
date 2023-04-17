@@ -57,6 +57,11 @@ variable "node_pools" {
   # DESC
 }
 
+variable "iam_role_to_assume" {
+  type        = string
+  description = "The name of the IAM role to assume"
+}
+
 locals {
   vpc = {
     cidr_block = var.vpc_cidr_block
