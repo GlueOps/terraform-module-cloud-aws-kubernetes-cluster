@@ -44,21 +44,20 @@ variable "node_pools" {
     spot          = false
     disk_size_gb  = 20
   }]
-  # description = <<-DESC
-  # node pool configurations:
-  #   - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
-  #   - node_count (number): number of nodes to create in the node pool.
-  #   - machine_type (string): Machine type to use for the nodes. ref: https://gcpinstances.doit-intl.com/
-  #   - disk_type (string): Disk type to use for the nodes. ref: https://cloud.google.com/compute/docs/disks
-  #   - disk_size_gb (number): Disk size in GB for the nodes.
-  #   - gke_version (string): GKE version to use for the nodes. ref: https://cloud.google.com/kubernetes-engine/docs/release-notes
-  #   - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
-  # DESC
+  description = <<-DESC
+  node pool configurations:
+    - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
+    - node_count (number): number of nodes to create in the node pool.
+    - instance_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/
+    - ami_image_id (string): AMI to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases
+    - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
+    - disk_size_gb (number): Disk size in GB for the nodes.
+  DESC
 }
 
 variable "iam_role_to_assume" {
   type        = string
-  description = "The name of the IAM role to assume"
+  description = "The full ARN of the IAM role to assume"
 }
 
 locals {
