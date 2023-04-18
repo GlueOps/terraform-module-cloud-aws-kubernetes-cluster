@@ -1,4 +1,4 @@
-name: Run Docker on PR
+name: AWS Regression Suite
 
 on:
   pull_request:
@@ -19,13 +19,13 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Run AWS Regression Suite
+    - name: Running AWS Regression Suite
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA5NYVRRRNV5TTBBPQ -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.21.2 ./run.shss
   
-    - name: Run Destroy in case a previous run failed
+    - name: Run AWS Destroy Only (in case previous step failed)
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
