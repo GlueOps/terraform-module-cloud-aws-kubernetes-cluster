@@ -10,7 +10,7 @@ echo "Terraform Apply"
 terraform apply -auto-approve
 terraform apply -auto-approve
 echo "Authenticate with Kubernetes"
-aws eks update-kubeconfig --region us-west-2 --name captain-cluster --role-arn arn:aws:iam::922926287963:role/glueops-captain
+aws eks update-kubeconfig --region us-west-2 --name captain-cluster --role-arn arn:aws:iam::761182885829:role/glueops-captain
 echo "Get nodes and pods from kubernetes"
 kubectl get nodes
 kubectl get pods --all-namespaces
