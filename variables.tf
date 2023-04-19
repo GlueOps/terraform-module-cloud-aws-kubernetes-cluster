@@ -61,6 +61,15 @@ variable "iam_role_to_assume" {
   description = "The full ARN of the IAM role to assume"
 }
 
+variable "peering_configs" {
+  description = "A list of maps containing VPC peering configuration details"
+  type = list(object({
+    vpc_peering_connection_id = string
+    destination_cidr_block    = string
+  }))
+  default = []
+}
+
 locals {
   vpc = {
     cidr_block = var.vpc_cidr_block
