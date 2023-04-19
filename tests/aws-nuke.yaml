@@ -2,7 +2,7 @@ account-blocklist:
 - "0123456789" # Keep listing any accounts you want to ensure do NOT get touched. If you did this properly and are using IAM credentials that only have access to your sub account then this is less important and could be left with this default/invalid value
 
 accounts:
-  922926287963: # EVERYTHING IN THIS ACCOUNT GETS DESTROYED!!!
+  761182885829: # EVERYTHING IN THIS ACCOUNT GETS DESTROYED!!!
     presets:
       - common #these presets basically say exclude certain things, these are things we want to keep so we can easily provision again into this account later
   
@@ -23,7 +23,7 @@ presets:
       IAMUserPolicyAttachment:
       - "glueops-deployment-svc -> AdministratorAccess" # Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called
       IAMUserAccessKey:
-      - "glueops-deployment-svc -> AKIA5NYVRRRNV5TTBBPQ" #Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called AND change `ABCDEFGHIJKLMNOPQRST` to whatever the AccessKey ID actually is from when you created it.
+      - "glueops-deployment-svc -> AKIA3COQJC7C2PNUKZV4" #Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called AND change `ABCDEFGHIJKLMNOPQRST` to whatever the AccessKey ID actually is from when you created it.
 
 
 
