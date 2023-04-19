@@ -7,24 +7,32 @@ variable "peering_configs" {
   default = []
 }
 
-variable "main_route_table_id" {
-  description = "VPC's main route table id"
-  type        = string
+variable "route_table_ids" {
+  description = "A list of route table ids"
+  type        = list(string)
+}
+
+locals {
+  peering_configs_map = {
+    for pc in var.peering_configs :
+    pc.vpc_peering_connection_id => pc
+  }
 }
 
 resource "aws_vpc_peering_connection_accepter" "accepter" {
-  count = length(var.peering_configs) > 0 ? length(var.peering_configs) : 0
+  for_each = local.peering_configs_map
 
-  vpc_peering_connection_id = var.peering_configs[count.index].vpc_peering_connection_id
+  vpc_peering_connection_id = each.key
   auto_accept               = true
 }
 
 locals {
   peering_routes = flatten([
     for pc in var.peering_configs : [
-      {
+      for rt_id in var.route_table_ids : {
         vpc_peering_connection_id = pc.vpc_peering_connection_id
         destination_cidr_block    = pc.destination_cidr_block
+        route_table_id            = rt_id
       }
     ]
   ])
@@ -33,14 +41,11 @@ locals {
 resource "aws_route" "peering_routes" {
   for_each = {
     for pr in local.peering_routes :
-    "${pr.vpc_peering_connection_id}-${var.main_route_table_id}" => pr
+    "${pr.vpc_peering_connection_id}-${pr.route_table_id}" => pr
   }
 
-  route_table_id            = var.main_route_table_id
+  route_table_id            = each.value.route_table_id
   destination_cidr_block    = each.value.destination_cidr_block
   vpc_peering_connection_id = each.value.vpc_peering_connection_id
 }
 
-output "vpc_peering_connection_ids" {
-  value = aws_vpc_peering_connection_accepter.accepter.*.id
-}
