@@ -23,7 +23,7 @@ presets:
       IAMUserPolicyAttachment:
       - "glueops-deployment-svc -> AdministratorAccess" # Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called
       IAMUserAccessKey:
-      - "glueops-deployment-svc -> AKIA3COQJC7C4VXVKZOK" #Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called AND change `ABCDEFGHIJKLMNOPQRST` to whatever the AccessKey ID actually is from when you created it.
+      - "glueops-deployment-svc -> AKIA3COQJC7C2PNUKZV4" #Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called AND change `ABCDEFGHIJKLMNOPQRST` to whatever the AccessKey ID actually is from when you created it.
 
 
 
