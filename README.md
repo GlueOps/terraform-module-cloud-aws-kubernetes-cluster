@@ -16,7 +16,7 @@ For more details see: https://github.com/GlueOps/terraform-module-cloud-aws-kube
 ```hcl
 module "captain" {
   iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain"
-  source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git?ref=feat/multiple-node-pools"
+  source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.26"
   csi_driver_version = "v1.17.0-eksbuild.1"
   vpc_cidr_block     = "10.65.0.0/16"
