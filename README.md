@@ -39,13 +39,13 @@ module "captain" {
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.55.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.64.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.55.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.64.0 |
 
 ## Modules
 
@@ -60,15 +60,15 @@ module "captain" {
 
 | Name | Type |
 |------|------|
-| [aws_eks_addon.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/eks_addon) | resource |
-| [aws_iam_role.eks_addon_ebs_csi_role](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_security_group.captain](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/security_group) | resource |
-| [aws_security_group_rule.allow_all_within_group](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.captain_egress_all_ipv4](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.captain_ingress_all_private](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/resources/security_group_rule) | resource |
-| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/data-sources/iam_openid_connect_provider) | data source |
-| [aws_iam_policy_document.eks_assume_addon_role](https://registry.terraform.io/providers/hashicorp/aws/4.55.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_eks_addon.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/eks_addon) | resource |
+| [aws_iam_role.eks_addon_ebs_csi_role](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_security_group.captain](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/security_group) | resource |
+| [aws_security_group_rule.allow_all_within_group](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.captain_egress_all_ipv4](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.captain_ingress_all_private](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/resources/security_group_rule) | resource |
+| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_policy_document.eks_assume_addon_role](https://registry.terraform.io/providers/hashicorp/aws/4.64.0/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
