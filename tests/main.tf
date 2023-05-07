@@ -8,7 +8,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
     {
-      "ami_image_id" : "amazon-eks-node-1.26-v20230406",
+      "ami_image_id" : "amazon-eks-node-1.26-v20230501",
       "instance_type" : "t3a.medium",
       "name" : "clusterwide-node-pool-1",
       "node_count" : 1,
