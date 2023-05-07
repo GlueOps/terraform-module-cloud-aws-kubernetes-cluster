@@ -29,7 +29,7 @@ module "node_pool" {
   for_each = { for np in var.node_pools : np.name => np }
   source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version = "2.9.0"
+  version = "2.9.1"
 
   instance_types = [each.value.instance_type]
   subnet_ids     = module.subnets.public_subnet_ids
@@ -103,6 +103,7 @@ resource "aws_eks_addon" "ebs_csi" {
   resolve_conflicts        = "OVERWRITE"
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
   depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
+  count                    = length(var.node_pools) > 0 ? 1 : 0
 }
 
 
