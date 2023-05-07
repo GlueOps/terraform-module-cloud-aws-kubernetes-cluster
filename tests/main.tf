@@ -7,14 +7,14 @@ module "captain" {
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
-    {
-      "ami_image_id" : "amazon-eks-node-1.26-v20230501",
-      "instance_type" : "t3a.medium",
-      "name" : "clusterwide-node-pool-1",
-      "node_count" : 1,
-      "spot" : false,
-      "disk_size_gb" : 20,
-      "max_pods" : 110
-    }
+    # {
+    #   "ami_image_id" : "amazon-eks-node-1.26-v20230411",
+    #   "instance_type" : "t3a.large",
+    #   "name" : "clusterwide-node-pool-1",
+    #   "node_count" : 2,
+    #   "spot" : false,
+    #   "disk_size_gb" : 20,
+    #   "max_pods" : 1000
+    # }
   ]
 }

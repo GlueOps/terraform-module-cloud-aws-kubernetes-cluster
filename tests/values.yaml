@@ -1,0 +1,9 @@
+installation:
+  kubernetesProvider: EKS
+  cni:
+    type: Calico
+  calicoNetwork:
+    bgp: Disabled
+    ipPools:
+    - cidr: 172.16.0.0/16
+      encapsulation: VXLAN
