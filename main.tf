@@ -52,6 +52,9 @@ module "node_pool" {
       "volume_type" : "gp2"
     }
   ]
+  kubelet_additional_options = [
+    "--max-pods=${each.value.max_pods}"
+  ]
   associated_security_group_ids = [aws_security_group.captain.id]
 }
 
