@@ -24,7 +24,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
     {
-      "ami_image_id" : "amazon-eks-node-1.26-v20230411",
+      "ami_image_id" : "amazon-eks-node-1.26-v20230501",
       "instance_type" : "t3a.large",
       "name" : "clusterwide-node-pool-1",
       "node_count" : 3,
@@ -53,7 +53,7 @@ module "captain" {
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_kubernetes"></a> [kubernetes](#module\_kubernetes) | cloudposse/eks-cluster/aws | 2.6.0 |
-| <a name="module_node_pool"></a> [node\_pool](#module\_node\_pool) | cloudposse/eks-node-group/aws | 2.9.0 |
+| <a name="module_node_pool"></a> [node\_pool](#module\_node\_pool) | cloudposse/eks-node-group/aws | 2.9.1 |
 | <a name="module_subnets"></a> [subnets](#module\_subnets) | cloudposse/dynamic-subnets/aws | 2.0.4 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | cloudposse/vpc/aws | 2.0.0 |
 | <a name="module_vpc_peering_accepter_with_routes"></a> [vpc\_peering\_accepter\_with\_routes](#module\_vpc\_peering\_accepter\_with\_routes) | ./modules/vpc_peering_accepter_with_routes | n/a |
