@@ -3,7 +3,7 @@ module "captain" {
   source             = "../"
   eks_version        = "1.26"
   csi_driver_version = "v1.18.0-eksbuild.1"
-  vpc_cidr_block     = "10.65.0.0/16"
+  vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
