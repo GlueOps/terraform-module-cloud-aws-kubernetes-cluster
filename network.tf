@@ -20,6 +20,7 @@ module "subnets" {
   private_subnets_enabled = false
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
+  max_subnet_count        = length(var.availability_zones)
 }
 
 resource "aws_security_group" "captain" {

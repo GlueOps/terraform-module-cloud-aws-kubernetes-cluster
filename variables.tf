@@ -36,6 +36,7 @@ variable "node_pools" {
     ami_image_id  = string
     spot          = bool
     disk_size_gb  = number
+    max_pods      = number
   }))
   default = [{
     name          = "default-pool"
@@ -44,6 +45,7 @@ variable "node_pools" {
     ami_image_id  = "amazon-eks-node-1.24-v20230406"
     spot          = false
     disk_size_gb  = 20
+    max_pods      = 110
   }]
   description = <<-DESC
   node pool configurations:
@@ -53,6 +55,7 @@ variable "node_pools" {
     - ami_image_id (string): AMI to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases
     - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
     - disk_size_gb (number): Disk size in GB for the nodes.
+    - max_pods (number): max pods that can be scheduled per node.
   DESC
 }
 
