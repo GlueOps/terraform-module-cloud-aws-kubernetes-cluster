@@ -19,7 +19,7 @@ module "kubernetes" {
   subnet_ids = module.subnets.public_subnet_ids
 
   oidc_provider_enabled      = true
-  name                       = "captain"
+  name                       = var.eks_cluster_name
   kubernetes_version         = var.eks_version
   apply_config_map_aws_auth  = false
   allowed_security_group_ids = [aws_security_group.captain.id]
@@ -31,13 +31,14 @@ module "node_pool" {
   # Cloud Posse recommends pinning every module to a specific version
   version = "2.9.1"
 
-  instance_types = [each.value.instance_type]
-  subnet_ids     = module.subnets.public_subnet_ids
-  desired_size   = each.value.node_count
-  min_size       = each.value.node_count
-  max_size       = each.value.node_count + 1
-  cluster_name   = module.kubernetes.eks_cluster_id
-  capacity_type  = each.value.spot ? "SPOT" : "ON_DEMAND"
+  instance_types     = [each.value.instance_type]
+  subnet_ids         = module.subnets.public_subnet_ids
+  desired_size       = each.value.node_count
+  min_size           = each.value.node_count
+  max_size           = each.value.node_count + 1
+  cluster_name       = module.kubernetes.eks_cluster_id
+  capacity_type      = each.value.spot ? "SPOT" : "ON_DEMAND"
+  kubernetes_taints  = each.value.kubernetes_taints
 
   cluster_autoscaler_enabled = false
   name                       = each.value.name
