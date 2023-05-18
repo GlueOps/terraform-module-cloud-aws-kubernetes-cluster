@@ -78,7 +78,6 @@ variable "node_pools" {
 variable "iam_role_to_assume" {
   type        = string
   description = "The full ARN of the IAM role to assume"
-  default = "arn:aws:iam::184515722743:role/captain-role"
 }
 
 variable "peering_configs" {
