@@ -1,16 +1,8 @@
-#eni:
-#  enabled: true
-#  awsEnablePrefixDelegation: true
-#  updateEC2AdapterLimitViaAPI: true
-#  awsReleaseExcessIPs: true
-
-#ipam:
-#  mode: eni
-
-nodeinit:
+hubble:
   enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
 
-endpointRoutes:
-  enabled: true
-#egressMasqueradeInterfaces: eth0
-#tunnel: disabled
+egressMasqueradeInterfaces: eth0
