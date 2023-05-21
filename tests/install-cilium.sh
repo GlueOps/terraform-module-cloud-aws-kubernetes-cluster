@@ -8,7 +8,7 @@ export AWS_ACCESS_KEY_ID=****************
 export AWS_SECRET_ACCESS_KEY=****************
 export AWS_DEFAULT_REGION=****************
 export AWS_ROLE_ARN=****************
-export CILIUM_VERSION=1.2.9
+export CILIUM_VERSION=1.12.9
 #export TF_LOG=DEBUG
 
 echo "Terraform Init"
