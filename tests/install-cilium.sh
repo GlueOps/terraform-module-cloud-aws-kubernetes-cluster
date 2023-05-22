@@ -2,12 +2,12 @@
 
 set -e
 
-#./destroy-aws.sh
+./destroy-aws.sh
 
-export AWS_ACCESS_KEY_ID=****************
-export AWS_SECRET_ACCESS_KEY=****************
-export AWS_DEFAULT_REGION=****************
-export AWS_ROLE_ARN=****************
+#export AWS_ACCESS_KEY_ID=****************
+#export AWS_SECRET_ACCESS_KEY=****************
+#export AWS_DEFAULT_REGION=****************
+export AWS_ROLE_ARN=arn:aws:iam::761182885829:role/glueops-captain
 export CILIUM_VERSION=1.12.9
 #export TF_LOG=DEBUG
 
