@@ -8,13 +8,12 @@
 #}
 
 module "captain" {
-  #iam_role_to_assume = "arn:aws:iam::184515722743:role/OrganizationAccountAccessRole"
-  iam_role_to_assume = "arn:aws:iam::184515722743:role/captain-role"
+  iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain"
   source             = "../"
   eks_version        = "1.26"
   eks_cluster_name   = "captain"
   csi_driver_version = "v1.18.0-eksbuild.1"
-  vpc_cidr_block     = "10.65.0.0/16"
+  vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
