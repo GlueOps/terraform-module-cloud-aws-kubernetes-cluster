@@ -1,6 +1,6 @@
 name: Generate terraform docs
 on:
-  - pull_request
+  - pull_request_target
 
 jobs:
   docs:
@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ref: ${{ github.event.pull_request.head.ref }}
+        ref: refs/pull/${{ github.event.pull_request.number }}/merge
 
     - name: Render terraform docs and push changes back to PR
       uses: terraform-docs/gh-actions@main
