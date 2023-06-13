@@ -38,15 +38,13 @@ module "captain" {
 
 ## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 4.67.0 |
+No requirements.
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.67.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
 
 ## Modules
 
@@ -62,28 +60,28 @@ module "captain" {
 
 | Name | Type |
 |------|------|
-| [aws_eks_addon.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/eks_addon) | resource |
-| [aws_iam_role.eks_addon_ebs_csi_role](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/iam_role_policy_attachment) | resource |
-| [aws_security_group.captain](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/security_group) | resource |
-| [aws_security_group_rule.allow_all_within_group](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.captain_egress_all_ipv4](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/security_group_rule) | resource |
-| [aws_security_group_rule.captain_ingress_all_private](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/resources/security_group_rule) | resource |
-| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/data-sources/iam_openid_connect_provider) | data source |
-| [aws_iam_policy_document.eks_assume_addon_role](https://registry.terraform.io/providers/hashicorp/aws/4.67.0/docs/data-sources/iam_policy_document) | data source |
+| [aws_eks_addon.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_addon) | resource |
+| [aws_iam_role.eks_addon_ebs_csi_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.ebs_csi](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_security_group.captain](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_security_group_rule.allow_all_within_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.captain_egress_all_ipv4](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_security_group_rule.captain_ingress_all_private](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule) | resource |
+| [aws_iam_openid_connect_provider.provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
+| [aws_iam_policy_document.eks_assume_addon_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | The availability zones to deploy into | `list(string)` | <pre>[<br>  "us-west-2a",<br>  "us-west-2b",<br>  "us-west-2c"<br>]</pre> | no |
-| <a name="input_csi_driver_version"></a> [csi\_driver\_version](#input\_csi\_driver\_version) | You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md | `string` | `"v1.17.0-eksbuild.1"` | no |
-| <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The version of EKS to deploy | `string` | `"1.26"` | no |
+| <a name="input_csi_driver_version"></a> [csi\_driver\_version](#input\_csi\_driver\_version) | You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md | `string` | `"v1.19.0-eksbuild.1"` | no |
+| <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The version of EKS to deploy | `string` | `"1.27"` | no |
 | <a name="input_iam_role_to_assume"></a> [iam\_role\_to\_assume](#input\_iam\_role\_to\_assume) | The full ARN of the IAM role to assume | `string` | n/a | yes |
-| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | node pool configurations:<br>  - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name<br>  - node\_count (number): number of nodes to create in the node pool.<br>  - instance\_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/<br>  - ami\_image\_id (string): AMI to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases<br>  - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!<br>  - disk\_size\_gb (number): Disk size in GB for the nodes.<br>  - max\_pods (number): max pods that can be scheduled per node. | <pre>list(object({<br>    name          = string<br>    node_count    = number<br>    instance_type = string<br>    ami_image_id  = string<br>    spot          = bool<br>    disk_size_gb  = number<br>    max_pods      = number<br>  }))</pre> | <pre>[<br>  {<br>    "ami_image_id": "amazon-eks-node-1.24-v20230406",<br>    "disk_size_gb": 20,<br>    "instance_type": "t3a.large",<br>    "max_pods": 110,<br>    "name": "default-pool",<br>    "node_count": 1,<br>    "spot": false<br>  }<br>]</pre> | no |
+| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | node pool configurations:<br>  - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name<br>  - node\_count (number): number of nodes to create in the node pool.<br>  - instance\_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/<br>  - ami\_image\_id (string): AMI to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases<br>  - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!<br>  - disk\_size\_gb (number): Disk size in GB for the nodes.<br>  - max\_pods (number): max pods that can be scheduled per node. | <pre>list(object({<br>    name          = string<br>    node_count    = number<br>    instance_type = string<br>    ami_image_id  = string<br>    spot          = bool<br>    disk_size_gb  = number<br>    max_pods      = number<br>  }))</pre> | <pre>[<br>  {<br>    "ami_image_id": "amazon-eks-node-1.27-v20230607",<br>    "disk_size_gb": 20,<br>    "instance_type": "t3a.large",<br>    "max_pods": 110,<br>    "name": "default-pool",<br>    "node_count": 1,<br>    "spot": false<br>  }<br>]</pre> | no |
 | <a name="input_peering_configs"></a> [peering\_configs](#input\_peering\_configs) | A list of maps containing VPC peering configuration details | <pre>list(object({<br>    vpc_peering_connection_id = string<br>    destination_cidr_block    = string<br>  }))</pre> | `[]` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
-| <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0/16"` | no |
+| <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0/26"` | no |
 
 ## Outputs
 
