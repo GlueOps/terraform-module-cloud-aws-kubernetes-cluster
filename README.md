@@ -49,16 +49,19 @@ This terraform module expects only to be an accepter VPC. This means a VPC peeri
 
 When providing them with the above, please ask them to [enable DNS resolution of hosts within the requester VPC](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
 
+### EFS Example PV:
+
 ```yaml
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-pv-venkat
+  name: nfs-pv-test
 spec:
+  storageClassName: efs-fun-test
   capacity:
     storage: 1000Gi # Adjust based on your needs
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   mountOptions:
       - timeo=600
@@ -71,6 +74,35 @@ spec:
   nfs:
     path: /
     server: nfs.nonprod.antoniostacos.onglueops.com
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-fun-test
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+      volumeMounts:
+        - name: my-volume
+          mountPath: /mnt/data  # Mount path within the container
+          subPath: pod1-fun
+  volumes:
+    - name: my-volume
+      persistentVolumeClaim:
+        claimName: my-pvc  # Name of the PVC to be mounted
 ```
 
 ## Requirements
