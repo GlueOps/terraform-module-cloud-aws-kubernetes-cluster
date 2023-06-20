@@ -49,7 +49,7 @@ This terraform module expects only to be an accepter VPC. This means a VPC peeri
 
 When providing them with the above, please ask them to [enable DNS resolution of hosts within the requester VPC](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
 
-### EFS Example PV:
+### EFS/NFS Example Manifest
 
 ```yaml
 apiVersion: v1
