@@ -33,7 +33,76 @@ module "captain" {
 #      "max_pods" : 110
 #    }
   ]
+
+  peering_configs = [
+#    {
+#    vpc_peering_connection_id = "pcx-0df92b5241651ba92"
+#    destination_cidr_block = "10.69.0.0/26"
+#    }
+  ]
 }
+```
+
+## VPC Peering
+
+This terraform module expects only to be an accepter VPC. This means a VPC peering request must come from the requesting account. As an accepter VPC you must provide the requester your VPC ID, your AWS Account ID (The subaccount being used for the cluster deployment), and the VPC CIDR you configured for the cluster deployment.
+
+When providing them with the above, please ask them to [enable DNS resolution of hosts within the requester VPC](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html#vpc-peering-dns).
+
+### EFS/NFS Example Manifest
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pv-test
+spec:
+  storageClassName: efs-fun-test
+  capacity:
+    storage: 1000Gi # Adjust based on your needs
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+      - timeo=600
+      - retrans=2
+      - nfsvers=4.1
+      - rsize=1048576
+      - wsize=1048576
+      - noresvport
+      - hard
+  nfs:
+    path: /
+    server: nfs.nonprod.antoniostacos.onglueops.com
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-fun-test
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-container
+      image: nginx
+      volumeMounts:
+        - name: my-volume
+          mountPath: /mnt/data  # Mount path within the container
+          subPath: pod1-fun
+  volumes:
+    - name: my-volume
+      persistentVolumeClaim:
+        claimName: my-pvc  # Name of the PVC to be mounted
 ```
 
 ## Requirements
