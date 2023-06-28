@@ -28,6 +28,12 @@ variable "eks_version" {
   default     = "1.26"
 }
 
+variable "eks_cluster_name" {
+  type        = string
+  description = "The name of EKS Cluster"
+  default     = "captain"
+}
+
 variable "node_pools" {
   type = list(object({
     name          = string
@@ -37,6 +43,11 @@ variable "node_pools" {
     spot          = bool
     disk_size_gb  = number
     max_pods      = number
+    kubernetes_taints = list(object({
+      key    = string
+      value  = string
+      effect = string
+    }))
   }))
   default = [{
     name          = "default-pool"
@@ -46,6 +57,11 @@ variable "node_pools" {
     spot          = false
     disk_size_gb  = 20
     max_pods      = 110
+    kubernetes_taints = [{
+      key   = "node.cilium.io/agent-not-ready"
+      value = "true"
+      effect = "NO_EXECUTE"
+    }]
   }]
   description = <<-DESC
   node pool configurations:
