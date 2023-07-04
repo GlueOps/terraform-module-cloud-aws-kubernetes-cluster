@@ -1,7 +1,7 @@
 module "vpc" {
   source = "cloudposse/vpc/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version                 = "2.0.0"
+  version                 = "2.1.0"
   ipv4_primary_cidr_block = local.vpc.cidr_block
   name                    = "captain"
 }
@@ -10,7 +10,7 @@ module "vpc" {
 module "subnets" {
   source = "cloudposse/dynamic-subnets/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version = "2.0.4"
+  version = "2.4.1"
 
   vpc_id                  = module.vpc.vpc_id
   igw_id                  = [module.vpc.igw_id]
