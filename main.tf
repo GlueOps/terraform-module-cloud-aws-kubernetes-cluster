@@ -97,10 +97,12 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 }
 
 resource "aws_eks_addon" "ebs_csi" {
-  cluster_name             = module.kubernetes.eks_cluster_id
-  addon_name               = "aws-ebs-csi-driver"
-  addon_version            = var.csi_driver_version
-  resolve_conflicts        = "OVERWRITE"
+  cluster_name                = module.kubernetes.eks_cluster_id
+  addon_name                  = "aws-ebs-csi-driver"
+  addon_version               = var.csi_driver_version
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
   depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
   count                    = length(var.node_pools) > 0 ? 1 : 0
