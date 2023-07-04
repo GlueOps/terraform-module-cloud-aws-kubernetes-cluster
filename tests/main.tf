@@ -4,7 +4,6 @@ module "captain" {
   eks_version                  = "1.27"
   csi_driver_version           = "v1.20.0-eksbuild.1"
   vpc_cidr_block               = "10.65.0.0/26"
-  kubernetes_service_ipv4_cidr = "172.18.0.0/16"
   region                       = "us-west-2"
   availability_zones           = ["us-west-2a", "us-west-2b"]
   node_pools = [
