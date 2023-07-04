@@ -67,6 +67,7 @@ kubectl get pvc
 kubectl get pods
 kubectl describe pods
 kubectl describe pvc
+kubectl -n kube-system logs -l app=ebs-csi-controller
 
 
 # Step 5: Test the storage functionality
