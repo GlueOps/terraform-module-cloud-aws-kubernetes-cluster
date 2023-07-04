@@ -66,6 +66,8 @@ sleep 120
 kubectl get pvc
 kubectl get pods
 kubectl describe pods
+kubectl describe pvc
+
 
 # Step 5: Test the storage functionality
 TEST_POD_NAME=$(kubectl get pods -l app=test-app -o jsonpath="{.items[0].metadata.name}")
