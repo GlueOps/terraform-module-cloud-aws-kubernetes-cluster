@@ -14,9 +14,10 @@ module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
   version = "2.8.1"
 
-  region     = var.region
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.subnets.public_subnet_ids
+  region            = var.region
+  vpc_id            = module.vpc.vpc_id
+  subnet_ids        = module.subnets.public_subnet_ids
+  service_ipv4_cidr = var.kubernetes_service_ipv4_cidr
 
   oidc_provider_enabled      = true
   name                       = "captain"
