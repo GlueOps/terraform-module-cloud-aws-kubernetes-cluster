@@ -2,7 +2,7 @@ module "captain" {
   iam_role_to_assume           = "arn:aws:iam::761182885829:role/glueops-captain"
   source                       = "../"
   eks_version                  = "1.27"
-  csi_driver_version           = "v1.18.0-eksbuild.1"
+  csi_driver_version           = "v1.20.0-eksbuild.1"
   vpc_cidr_block               = "10.65.0.0/26"
   kubernetes_service_ipv4_cidr = "172.18.0.0/16"
   region                       = "us-west-2"
