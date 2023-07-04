@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Step 1: Verify storage driver installation (Amazon EBS CSI Driver)
 echo "Checking if the storage driver is installed..."
 kubectl get pods -n kube-system | grep "ebs-csi-"
@@ -62,12 +64,11 @@ EOF
 
 # Step 4: Verify the PVC and pod are created and bound
 echo "Waiting for the PVC to be bound and the pod to be running..."
-sleep 120
+sleep 30
 kubectl get pvc
 kubectl get pods
 kubectl describe pods
 kubectl describe pvc
-kubectl -n kube-system logs -l app=ebs-csi-controller
 
 
 # Step 5: Test the storage functionality
