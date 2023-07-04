@@ -62,9 +62,10 @@ EOF
 
 # Step 4: Verify the PVC and pod are created and bound
 echo "Waiting for the PVC to be bound and the pod to be running..."
-sleep 30
+sleep 120
 kubectl get pvc
 kubectl get pods
+kubectl describe pods
 
 # Step 5: Test the storage functionality
 TEST_POD_NAME=$(kubectl get pods -l app=test-app -o jsonpath="{.items[0].metadata.name}")
