@@ -5,7 +5,7 @@ variable "region" {
 
 variable "csi_driver_version" {
   type        = string
-  default     = "v1.19.0-eksbuild.1"
+  default     = "v1.20.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -25,7 +25,7 @@ variable "availability_zones" {
 variable "eks_version" {
   type        = string
   description = "The version of EKS to deploy"
-  default     = "1.26"
+  default     = "1.27"
 }
 
 variable "node_pools" {
@@ -42,7 +42,7 @@ variable "node_pools" {
     name          = "default-pool"
     node_count    = 1
     instance_type = "t3a.large"
-    ami_image_id  = "amazon-eks-node-1.26-v20230607"
+    ami_image_id  = "amazon-eks-node-1.27-v20230607"
     spot          = false
     disk_size_gb  = 20
     max_pods      = 110

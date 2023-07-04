@@ -12,11 +12,11 @@ provider "aws" {
 
 module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
-  version = "2.6.0"
+  version = "2.8.1"
 
-  region     = var.region
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.subnets.public_subnet_ids
+  region            = var.region
+  vpc_id            = module.vpc.vpc_id
+  subnet_ids        = module.subnets.public_subnet_ids
 
   oidc_provider_enabled      = true
   name                       = "captain"
@@ -29,7 +29,7 @@ module "node_pool" {
   for_each = { for np in var.node_pools : np.name => np }
   source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version = "2.9.1"
+  version = "2.10.0"
 
   instance_types = [each.value.instance_type]
   subnet_ids     = module.subnets.public_subnet_ids
@@ -97,13 +97,13 @@ resource "aws_iam_role_policy_attachment" "ebs_csi" {
 }
 
 resource "aws_eks_addon" "ebs_csi" {
-  cluster_name             = module.kubernetes.eks_cluster_id
-  addon_name               = "aws-ebs-csi-driver"
-  addon_version            = var.csi_driver_version
-  resolve_conflicts        = "OVERWRITE"
+  cluster_name                = module.kubernetes.eks_cluster_id
+  addon_name                  = "aws-ebs-csi-driver"
+  addon_version               = var.csi_driver_version
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
   depends_on               = [aws_iam_role_policy_attachment.ebs_csi, module.node_pool]
   count                    = length(var.node_pools) > 0 ? 1 : 0
 }
-
-
