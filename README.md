@@ -17,14 +17,14 @@ For more details see: https://github.com/GlueOps/terraform-module-cloud-aws-kube
 module "captain" {
   iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain"
   source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
-  eks_version        = "1.26"
+  eks_version        = "1.27"
   csi_driver_version = "v1.19.0-eksbuild.1"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_image_id" : "amazon-eks-node-1.26-v20230607",
+#      "ami_image_id" : "amazon-eks-node-1.27-v20230607",
 #      "instance_type" : "t3a.large",
 #      "name" : "clusterwide-node-pool-1",
 #      "node_count" : 3,
@@ -33,7 +33,6 @@ module "captain" {
 #      "max_pods" : 110
 #    }
   ]
-
   peering_configs = [
 #    {
 #    vpc_peering_connection_id = "pcx-0df92b5241651ba92"
