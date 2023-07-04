@@ -15,12 +15,6 @@ variable "vpc_cidr_block" {
   default     = "10.65.0.0/26"
 }
 
-variable "kubernetes_service_ipv4_cidr" {
-  type        = string
-  description = "The CIDR block for the Kubernetes service"
-  default     = "172.18.0.0/16"
-}
-
 variable "availability_zones" {
   type        = list(string)
   description = "The availability zones to deploy into"
