@@ -38,6 +38,7 @@ module "node_pool" {
   max_size         = each.value.node_count + 1
   cluster_name     = module.kubernetes.eks_cluster_id
   capacity_type    = each.value.spot ? "SPOT" : "ON_DEMAND"
+  ami_image_id     = each.value.ami_image_id
 
   cluster_autoscaler_enabled = false
   name                       = each.value.name
