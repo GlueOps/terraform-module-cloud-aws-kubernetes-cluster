@@ -40,13 +40,14 @@ variable "node_pools" {
     ssh_key_pair_names = list(string)
   }))
   default = [{
-    name          = "default-pool"
-    node_count    = 1
-    instance_type = "t3a.large"
-    ami_image_id  = "amazon-eks-node-1.27-v20230607"
-    spot          = false
-    disk_size_gb  = 20
-    max_pods      = 110
+    name               = "default-pool"
+    node_count         = 1
+    instance_type      = "t3a.large"
+    ami_image_id       = "amazon-eks-node-1.27-v20230607"
+    spot               = false
+    disk_size_gb       = 20
+    max_pods           = 110
+    ssh_key_pair_names = []
   }]
   description = <<-DESC
   node pool configurations:

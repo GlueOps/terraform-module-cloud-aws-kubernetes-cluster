@@ -14,7 +14,7 @@ module "captain" {
     #   "node_count" : 2,
     #   "spot" : false,
     #   "disk_size_gb" : 20,
-    #   "max_pods" : 1000
+    #   "max_pods" : 1000,
     #   "ssh_key_pair_names" : []
     # }
   ]
