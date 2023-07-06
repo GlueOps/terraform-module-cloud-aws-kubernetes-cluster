@@ -14,9 +14,9 @@ module "kubernetes" {
   source  = "cloudposse/eks-cluster/aws"
   version = "2.8.1"
 
-  region            = var.region
-  vpc_id            = module.vpc.vpc_id
-  subnet_ids        = module.subnets.public_subnet_ids
+  region     = var.region
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.subnets.public_subnet_ids
 
   oidc_provider_enabled      = true
   name                       = "captain"
@@ -29,15 +29,15 @@ module "node_pool" {
   for_each = { for np in var.node_pools : np.name => np }
   source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version = "2.10.0"
-
-  instance_types = [each.value.instance_type]
-  subnet_ids     = module.subnets.public_subnet_ids
-  desired_size   = each.value.node_count
-  min_size       = each.value.node_count
-  max_size       = each.value.node_count + 1
-  cluster_name   = module.kubernetes.eks_cluster_id
-  capacity_type  = each.value.spot ? "SPOT" : "ON_DEMAND"
+  version          = "2.10.0"
+  ec2_ssh_key_name = each.value.ssh_key_pair_names
+  instance_types   = [each.value.instance_type]
+  subnet_ids       = module.subnets.public_subnet_ids
+  desired_size     = each.value.node_count
+  min_size         = each.value.node_count
+  max_size         = each.value.node_count + 1
+  cluster_name     = module.kubernetes.eks_cluster_id
+  capacity_type    = each.value.spot ? "SPOT" : "ON_DEMAND"
 
   cluster_autoscaler_enabled = false
   name                       = each.value.name

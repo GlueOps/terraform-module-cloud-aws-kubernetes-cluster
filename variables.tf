@@ -30,13 +30,14 @@ variable "eks_version" {
 
 variable "node_pools" {
   type = list(object({
-    name          = string
-    node_count    = number
-    instance_type = string
-    ami_image_id  = string
-    spot          = bool
-    disk_size_gb  = number
-    max_pods      = number
+    name               = string
+    node_count         = number
+    instance_type      = string
+    ami_image_id       = string
+    spot               = bool
+    disk_size_gb       = number
+    max_pods           = number
+    ssh_key_pair_names = list(string)
   }))
   default = [{
     name          = "default-pool"
@@ -56,6 +57,7 @@ variable "node_pools" {
     - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
     - disk_size_gb (number): Disk size in GB for the nodes.
     - max_pods (number): max pods that can be scheduled per node.
+    - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
   DESC
 }
 
