@@ -30,31 +30,31 @@ variable "eks_version" {
 
 variable "node_pools" {
   type = list(object({
-    name               = string
-    node_count         = number
-    instance_type      = string
-    ami_image_id       = string
-    spot               = bool
-    disk_size_gb       = number
-    max_pods           = number
-    ssh_key_pair_names = list(string)
+    name                = string
+    node_count          = number
+    instance_type       = string
+    ami_release_version = string
+    spot                = bool
+    disk_size_gb        = number
+    max_pods            = number
+    ssh_key_pair_names  = list(string)
   }))
   default = [{
-    name               = "default-pool"
-    node_count         = 1
-    instance_type      = "t3a.large"
-    ami_image_id       = "amazon-eks-node-1.27-v20230607"
-    spot               = false
-    disk_size_gb       = 20
-    max_pods           = 110
-    ssh_key_pair_names = []
+    name                = "default-pool"
+    node_count          = 1
+    instance_type       = "t3a.large"
+    ami_release_version = "1.27.1-20230703"
+    spot                = false
+    disk_size_gb        = 20
+    max_pods            = 110
+    ssh_key_pair_names  = []
   }]
   description = <<-DESC
   node pool configurations:
     - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
     - node_count (number): number of nodes to create in the node pool.
     - instance_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/
-    - ami_image_id (string): AMI to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases
+    - ami_release_version (string): AMI release version to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases
     - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
     - disk_size_gb (number): Disk size in GB for the nodes.
     - max_pods (number): max pods that can be scheduled per node.
