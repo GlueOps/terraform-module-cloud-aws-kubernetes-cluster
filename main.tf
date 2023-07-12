@@ -39,6 +39,8 @@ module "node_pool" {
   cluster_name        = module.kubernetes.eks_cluster_id
   capacity_type       = each.value.spot ? "SPOT" : "ON_DEMAND"
   ami_release_version = [each.value.ami_release_version]
+  labels              = each.value.kubernetes_labels
+  taints              = each.value.kubernetes_taints
 
   cluster_autoscaler_enabled = false
   name                       = each.value.name

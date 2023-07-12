@@ -38,6 +38,13 @@ variable "node_pools" {
     disk_size_gb        = number
     max_pods            = number
     ssh_key_pair_names  = list(string)
+    kubernetes_labels   = map(string)
+    kubernetes_taints = list(object({
+      key    = string
+      value  = string
+      effect = string
+    }))
+
   }))
   default = [{
     name                = "default-pool"
@@ -48,6 +55,8 @@ variable "node_pools" {
     disk_size_gb        = 20
     max_pods            = 110
     ssh_key_pair_names  = []
+    kubernetes_labels   = {}
+    kubernetes_taints   = []
   }]
   description = <<-DESC
   node pool configurations:
@@ -59,6 +68,8 @@ variable "node_pools" {
     - disk_size_gb (number): Disk size in GB for the nodes.
     - max_pods (number): max pods that can be scheduled per node.
     - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
+    - kubernetes_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+    - kubernetes_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
   DESC
 }
 
