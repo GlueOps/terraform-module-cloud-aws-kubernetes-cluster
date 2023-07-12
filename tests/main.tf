@@ -15,7 +15,9 @@ module "captain" {
     #   "spot" : false,
     #   "disk_size_gb" : 20,
     #   "max_pods" : 1000,
-    #   "ssh_key_pair_names" : []
+    #   "ssh_key_pair_names" : [],
+    #   "kubernetes_labels": {},
+    #   "kubernetes_taints": []
     # }
   ]
 }
