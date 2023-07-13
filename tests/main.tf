@@ -7,17 +7,37 @@ module "captain" {
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
-    # {
-    #   "ami_image_id" : "ami-0c3bf2dfecd4a139e",
-    #   "instance_type" : "t3a.small",
-    #   "name" : "clusterwide-node-pool-1",
-    #   "node_count" : 2,
-    #   "spot" : false,
-    #   "disk_size_gb" : 20,
-    #   "max_pods" : 1000,
-    #   "ssh_key_pair_names" : [],
-    #   "kubernetes_labels": {},
-    #   "kubernetes_taints": []
-    # }
+#    {
+#      "ami_image_id" : "ami-0c3bf2dfecd4a139e",
+#      "instance_type" : "t3a.small",
+#      "name" : "glueops-platform-node-pool-1",
+#      "node_count" : 3,
+#      "spot" : false,
+#      "disk_size_gb" : 20,
+#      "max_pods" : 110,
+#      "ssh_key_pair_names" : []
+#      "kubernetes_labels" : {
+#        "glueops.dev/role" : "glueops-platform"
+#      },
+#      "kubernetes_taints" : [
+#        {
+#          key    = "glueops.dev/role"
+#          value  = "glueops-platform"
+#          effect = "NO_SCHEDULE"
+#        }
+#      ]
+#    },
+#    {
+#      "ami_image_id" : "ami-0c3bf2dfecd4a139e",
+#      "instance_type" : "t3a.small",
+#      "name" : "clusterwide-node-pool-1",
+#      "node_count" : 3,
+#      "spot" : false,
+#      "disk_size_gb" : 20,
+#      "max_pods" : 110,
+#      "ssh_key_pair_names" : [],
+#      "kubernetes_labels" : {},
+#      "kubernetes_taints" : []
+#    }
   ]
 }
