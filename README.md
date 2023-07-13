@@ -26,7 +26,7 @@ module "captain" {
 #    {
 #      "ami_image_id" : "ami-0c3bf2dfecd4a139e",
 #      "instance_type" : "t3a.large",
-#      "name" : "glueops-platform-node-pool-3",
+#      "name" : "glueops-platform-node-pool-1",
 #      "node_count" : 3,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
@@ -46,7 +46,7 @@ module "captain" {
 #    {
 #      "ami_image_id" : "ami-0c3bf2dfecd4a139e",
 #      "instance_type" : "t3a.large",
-#      "name" : "clusterwide-node-pool-4",
+#      "name" : "clusterwide-node-pool-1",
 #      "node_count" : 3,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
