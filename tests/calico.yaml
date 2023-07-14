@@ -30,7 +30,6 @@ tolerations:
 # NodeSelector for the tigera/operator pod.
 nodeSelector:
   kubernetes.io/os: linux
-  glueops.dev/role: "glueops-platform"
 
 # Custom annotations for the tigera/operator pod.
 podAnnotations: {}
