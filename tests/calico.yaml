@@ -22,6 +22,10 @@ tolerations:
   operator: Exists
 - effect: NoSchedule
   operator: Exists
+- key: "glueops.dev/role"
+  operator: "Equal"
+  value: "glueops-platform"
+  effect: "NoSchedule" 
 
 # NodeSelector for the tigera/operator pod.
 nodeSelector:
