@@ -23,11 +23,11 @@ jobs:
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.26.0 ./run.sh
+        docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.28.0 ./run.sh
   
     - name: Run AWS Destroy Only (in case previous step failed)
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.26.0 ./destroy-aws.sh
+        docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.28.0 ./destroy-aws.sh
       if: always()
