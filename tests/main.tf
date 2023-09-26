@@ -2,13 +2,13 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain"
   source             = "../"
   eks_version        = "1.27"
-  csi_driver_version = "v1.22.0-eksbuild.2"
+  csi_driver_version = "v1.23.0-eksbuild.1"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_image_id" : "ami-0bce9ab1f1be3282a",
+#      "ami_image_id" : "ami-0d62cf3c1488af0a3",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-1",
 #      "node_count" : 2,
@@ -28,7 +28,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_image_id" : "ami-0bce9ab1f1be3282a",
+#      "ami_image_id" : "ami-0d62cf3c1488af0a3",
 #      "instance_type" : "t3a.small",
 #      "name" : "clusterwide-node-pool-1",
 #      "node_count" : 2,
