@@ -8,7 +8,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_image_id" : "ami-0d62cf3c1488af0a3",
+#      "ami_image_id" : "ami-084cf519d356bb718",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-1",
 #      "node_count" : 2,
@@ -28,7 +28,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_image_id" : "ami-0d62cf3c1488af0a3",
+#      "ami_image_id" : "ami-084cf519d356bb718",
 #      "instance_type" : "t3a.small",
 #      "name" : "clusterwide-node-pool-1",
 #      "node_count" : 2,
