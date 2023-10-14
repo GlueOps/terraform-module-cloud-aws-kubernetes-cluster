@@ -29,6 +29,9 @@ jobs:
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
+        docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces ls
+        docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces pwd
+
         docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces chmod +x run.sh && ./run.sh
   
     - name: Run AWS Destroy Only (in case previous step failed)
