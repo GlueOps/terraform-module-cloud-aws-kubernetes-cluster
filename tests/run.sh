@@ -35,10 +35,9 @@ kubectl get nodes
 kubectl get pods -A -o=wide
 echo "::endgroup::"
 
-echo "Start Test Suite"
-echo ""
+echo "==> Start Test Suite"
 ./k8s-test.sh
-echo "Test Suite Complete"
+echo "==> Test Suite Complete"
 
 echo "::group::Tear down Environment"
 echo "Terraform Destroy"
