@@ -19,15 +19,25 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    - name: Setup Codespace Container
+      run: |
+        echo "::group::Setup Codespace Container"
+        docker run -d -v $(pwd):/app --workdir /app/tests --rm --name codespaces ghcr.io/glueops/codespaces:v0.31.1 sleep infinity
+        echo "::endgroup::"
+
     - name: Running AWS Regression Suite
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.31.1 ./run.sh
+        docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces sh ./run.sh
   
     - name: Run AWS Destroy Only (in case previous step failed)
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        docker run -v $(pwd):/app --workdir /app/tests --rm -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 ghcr.io/glueops/codespaces:v0.31.1 ./destroy-aws.sh
+        docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces sh ./destroy-aws.sh
+      if: always()
+
+    - name: Delete Codespaces Container
+      run: docker rm -f codespaces
       if: always()
