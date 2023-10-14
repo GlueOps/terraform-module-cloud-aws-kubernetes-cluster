@@ -5,7 +5,7 @@ variable "region" {
 
 variable "csi_driver_version" {
   type        = string
-  default     = "v1.23.0-eksbuild.1"
+  default     = "v1.23.1-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -84,7 +84,7 @@ variable "node_pools" {
     name               = "default-pool"
     node_count         = 1
     instance_type      = "t3a.large"
-    ami_image_id       = "ami-0d62cf3c1488af0a3"
+    ami_image_id       = "ami-084cf519d356bb718"
     spot               = false
     disk_size_gb       = 20
     max_pods           = 110
