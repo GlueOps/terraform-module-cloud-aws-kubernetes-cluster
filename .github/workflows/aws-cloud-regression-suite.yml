@@ -29,11 +29,11 @@ jobs:
 
     - name: Running AWS Regression Suite
       run: |
-        docker exec -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces ./run.sh
+        docker exec -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces chmod +x run.sh && ./run.sh
   
     - name: Run AWS Destroy Only (in case previous step failed)
       run: |
-        docker exec -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces ./destroy-aws.sh
+        docker exec -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces chmod +x destroy-aws.sh && ./destroy-aws.sh
       if: always()
 
     - name: Delete Codespaces Container
