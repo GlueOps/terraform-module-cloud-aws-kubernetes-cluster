@@ -1,6 +1,6 @@
 module "captain" {
-  iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain"
-  source             = "../"
+  iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain-role"
+  source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.27"
   csi_driver_version = "v1.24.1-eksbuild.1"
   vpc_cidr_block     = "10.65.0.0/26"
@@ -9,9 +9,9 @@ module "captain" {
   node_pools = [
 #    {
 #      "ami_image_id" : "ami-0b9177c9139f911c2",
-#      "instance_type" : "t3a.small",
+#      "instance_type" : "t3a.xlarge",
 #      "name" : "glueops-platform-node-pool-1",
-#      "node_count" : 2,
+#      "node_count" : 4,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
 #      "max_pods" : 110,
@@ -29,15 +29,21 @@ module "captain" {
 #    },
 #    {
 #      "ami_image_id" : "ami-0b9177c9139f911c2",
-#      "instance_type" : "t3a.small",
+#      "instance_type" : "t3a.large",
 #      "name" : "clusterwide-node-pool-1",
-#      "node_count" : 2,
+#      "node_count" : 4,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
 #      "max_pods" : 110,
 #      "ssh_key_pair_names" : [],
 #      "kubernetes_labels" : {},
 #      "kubernetes_taints" : []
+#    }
+  ]
+  peering_configs = [
+#    {
+#    vpc_peering_connection_id = "pcx-0df92b5241651ba92"
+#    destination_cidr_block = "10.69.0.0/26"
 #    }
   ]
 }
