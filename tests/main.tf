@@ -1,5 +1,5 @@
 module "captain" {
-  iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain"
+  iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role" 
   source             = "../"
   eks_version        = "1.27"
   csi_driver_version = "v1.24.1-eksbuild.1"
