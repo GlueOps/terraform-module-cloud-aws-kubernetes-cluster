@@ -9,9 +9,9 @@ module "captain" {
   node_pools = [
 #    {
 #      "ami_image_id" : "ami-0b9177c9139f911c2",
-#      "instance_type" : "t3a.small",
+#      "instance_type" : "t3a.xlarge",
 #      "name" : "glueops-platform-node-pool-1",
-#      "node_count" : 2,
+#      "node_count" : 4,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
 #      "max_pods" : 110,
@@ -29,9 +29,9 @@ module "captain" {
 #    },
 #    {
 #      "ami_image_id" : "ami-0b9177c9139f911c2",
-#      "instance_type" : "t3a.small",
+#      "instance_type" : "t3a.large",
 #      "name" : "clusterwide-node-pool-1",
-#      "node_count" : 2,
+#      "node_count" : 4,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
 #      "max_pods" : 110,
