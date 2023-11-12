@@ -15,6 +15,6 @@ provider "aws" {
 
 
 module "provider_versions" {
-  source = "git::https://github.com/GlueOps/terraform-module-provider-versions.git?ref=feat-update-aws-provider"
+  source = "git::https://github.com/GlueOps/terraform-module-provider-versions.git"
 }
 
