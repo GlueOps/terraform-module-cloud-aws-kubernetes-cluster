@@ -2,10 +2,6 @@
 
 set -e
 
-echo "::group::Destroy anything left running"
-./destroy-aws.sh
-echo "::endgroup::"
-
 echo "::group::Deploying Kubernetes"
 echo "Terraform Init"
 terraform init
@@ -19,11 +15,15 @@ echo "::group::Configuring Kubernetes"
 echo "Authenticate with Kubernetes"
 aws eks update-kubeconfig --region us-west-2 --name captain-cluster --role-arn arn:aws:iam::761182885829:role/glueops-captain-role
 echo "Delete AWS CNI"
-kubectl delete daemonset -n kube-system aws-node
+if kubectl get daemonset -n kube-system aws-node; then
+    kubectl delete daemonset -n kube-system aws-node
+else
+    echo "DaemonSet 'aws-node' does not exist. Skipping delete command."
+fi
 echo "Install Calico CNI"
 helm repo add projectcalico https://docs.tigera.io/calico/charts
 helm repo update
-helm install calico projectcalico/tigera-operator --version v3.26.1 --namespace tigera-operator -f calico.yaml --create-namespace
+helm  upgrade --install calico projectcalico/tigera-operator --version v3.26.1 --namespace tigera-operator -f calico.yaml --create-namespace
 echo "::endgroup::"
 
 echo "::group::Deploying new Node Pool"

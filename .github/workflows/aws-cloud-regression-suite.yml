@@ -25,7 +25,29 @@ jobs:
         docker run -d -v $(pwd):/app --workdir /app/tests --rm --name codespaces ghcr.io/glueops/codespaces:v0.31.4 sleep infinity
         echo "::endgroup::"
 
+    - name: Destroy anything left running
+      env:
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces sh ./destroy-aws.sh
+
     - name: Running AWS Regression Suite
+      id: regression_suite_1
+      env:
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        set +e
+        docker exec --workdir /app/tests -e AWS_SECRET_ACCESS_KEY -e AWS_ACCESS_KEY_ID=AKIA3COQJC7C2PNUKZV4 -e AWS_DEFAULT_REGION=us-west-2 codespaces sh ./run.sh
+        exit_code=$?
+        if [ $exit_code -ne 0 ]; then
+          echo "::set-output name=retry::true"
+          exit 0
+        else
+            echo "::set-output name=retry::false"
+        fi
+
+    - name: Running AWS Regression Suite again if previous run failed, addressing ConcurrentModification error from upstream provider
+      if: steps.regression_suite_1.outputs.retry == 'true'
       env:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
