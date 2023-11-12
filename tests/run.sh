@@ -17,7 +17,7 @@ echo "::endgroup::"
 
 echo "::group::Configuring Kubernetes"
 echo "Authenticate with Kubernetes"
-aws eks update-kubeconfig --region us-west-2 --name captain-cluster --role-arn arn:aws:iam::761182885829:role/glueops-captain-role
+aws eks update-kubeconfig --region us-east-1 --name captain-cluster --role-arn arn:aws:iam::761182885829:role/glueops-captain-role
 echo "Delete AWS CNI"
 kubectl delete daemonset -n kube-system aws-node
 echo "Install Calico CNI"
