@@ -5,7 +5,7 @@ module "captain" {
   csi_driver_version = "v1.24.1-eksbuild.1"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-east-1"
-  availability_zones = ["us-west-2a", "us-west-2b"]
+  availability_zones = ["us-east-2a", "us-east-2b"]
   node_pools = [
 #    {
 #      "ami_image_id" : "ami-02a1c9c2cf0dd5307",
