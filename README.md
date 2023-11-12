@@ -141,7 +141,7 @@ No requirements.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_kubernetes"></a> [kubernetes](#module\_kubernetes) | cloudposse/eks-cluster/aws | 2.8.1 |
+| <a name="module_kubernetes"></a> [kubernetes](#module\_kubernetes) | cloudposse/eks-cluster/aws | 3.0.0 |
 | <a name="module_node_pool"></a> [node\_pool](#module\_node\_pool) | cloudposse/eks-node-group/aws | 2.12.0 |
 | <a name="module_provider_versions"></a> [provider\_versions](#module\_provider\_versions) | git::https://github.com/GlueOps/terraform-module-provider-versions.git | n/a |
 | <a name="module_subnets"></a> [subnets](#module\_subnets) | cloudposse/dynamic-subnets/aws | 2.4.1 |
