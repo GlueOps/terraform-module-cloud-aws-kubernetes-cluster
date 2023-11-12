@@ -12,3 +12,8 @@ provider "aws" {
     role_arn = var.iam_role_to_assume
   }
 }
+
+
+module "provider_versions" {
+  source = "git::https://github.com/GlueOps/terraform-module-provider-versions.git"
+}
