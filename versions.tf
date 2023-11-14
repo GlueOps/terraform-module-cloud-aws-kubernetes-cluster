@@ -12,3 +12,4 @@ provider "aws" {
     role_arn = var.iam_role_to_assume
   }
 }
+
