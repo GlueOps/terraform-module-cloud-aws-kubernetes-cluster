@@ -1,7 +1,7 @@
 module "vpc" {
   source = "cloudposse/vpc/aws"
   # Cloud Posse recommends pinning every module to a specific version
-  version                 = "2.1.1"
+  version                 = "2.2.0"
   ipv4_primary_cidr_block = local.vpc.cidr_block
   name                    = "captain"
 }
