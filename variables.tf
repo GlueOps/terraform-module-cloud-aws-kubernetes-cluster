@@ -84,7 +84,7 @@ variable "node_pools" {
     name               = "default-pool"
     node_count         = 1
     instance_type      = "t3a.large"
-    ami_image_id       = "ami-0669c37b51df72204"
+    ami_image_id       = "ami-05eb3a655e73909a1"
     spot               = false
     disk_size_gb       = 20
     max_pods           = 110
