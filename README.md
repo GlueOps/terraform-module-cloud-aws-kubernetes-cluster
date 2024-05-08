@@ -19,7 +19,7 @@ module "captain" {
   source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.28"
   csi_driver_version = "v1.30.0-eksbuild.1"
-  coredns_version    = "v1.10.1-eksbuild.7"
+  coredns_version    = "v1.10.1-eksbuild.10"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
