@@ -61,7 +61,6 @@ resource "aws_eks_addon" "coredns" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
 
-  service_account_role_arn = null
   depends_on               = [module.node_pool]
   count                    = length(var.node_pools) > 0 ? 1 : 0
 
@@ -76,7 +75,6 @@ resource "aws_eks_addon" "kube_proxy" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
 
-  service_account_role_arn = null
   depends_on               = [module.node_pool]
   count                    = length(var.node_pools) > 0 ? 1 : 0
 }
