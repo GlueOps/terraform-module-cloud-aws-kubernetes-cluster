@@ -53,3 +53,28 @@ resource "aws_eks_addon" "ebs_csi" {
   configuration_values     = local.csi_addon_node_tolerations
 
 }
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name                = module.kubernetes.eks_cluster_id
+  addon_name                  = "coredns"
+  addon_version               = var.coredns_version
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
+  service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
+  depends_on               = [module.node_pool]
+  count                    = length(var.node_pools) > 0 ? 1 : 0
+  configuration_values = local.coredns_addon_node_tolerations
+}
+
+
+resource "aws_eks_addon" "kube_proxy" {
+  cluster_name                = module.kubernetes.eks_cluster_id
+  addon_name                  = "kube-proxy"
+  addon_version               = var.kube_proxy_version
+  resolve_conflicts_on_create = "OVERWRITE"
+  resolve_conflicts_on_update = "OVERWRITE"
+
+  depends_on               = [module.node_pool]
+  count                    = length(var.node_pools) > 0 ? 1 : 0
+}
