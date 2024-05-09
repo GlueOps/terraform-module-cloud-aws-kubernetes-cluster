@@ -79,6 +79,4 @@ resource "aws_eks_addon" "kube_proxy" {
   service_account_role_arn = null
   depends_on               = [module.node_pool]
   count                    = length(var.node_pools) > 0 ? 1 : 0
-
-  configuration_values = local.coredns_addon_node_tolerations
 }
