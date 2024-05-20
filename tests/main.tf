@@ -39,7 +39,7 @@ module "captain" {
 #      "max_pods" : 110,
 #      "ssh_key_pair_names" : [],
 #      "kubernetes_labels" : {
-#        "glueops.dev/role" : "glueops-platform"
+#        "glueops.dev/role" : "glueops-platform-argocd-app-controller"
 #      },
 #      "kubernetes_taints" : [
 #        {
