@@ -17,7 +17,7 @@ variable "coredns_version" {
 
 variable "kube_proxy_version" {
   type        = string
-  default     = "v1.27.10-eksbuild.2"
+  default     = "v1.28.6-eksbuild.2	"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
