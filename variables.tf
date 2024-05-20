@@ -5,7 +5,7 @@ variable "region" {
 
 variable "csi_driver_version" {
   type        = string
-  default     = "v1.31.0-eksbuild.1"
+  default     = "v1.30.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
