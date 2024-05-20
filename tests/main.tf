@@ -44,7 +44,7 @@ module "captain" {
 #      "kubernetes_taints" : [
 #        {
 #          key    = "glueops.dev/role"
-#          value  = "glueops-platform"
+#          value  = "glueops-platform-argocd-app-controller"
 #          effect = "NO_SCHEDULE"
 #        }
 #      ]
