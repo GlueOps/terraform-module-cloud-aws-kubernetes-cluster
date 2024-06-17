@@ -5,19 +5,19 @@ variable "region" {
 
 variable "csi_driver_version" {
   type        = string
-  default     = "v1.30.0-eksbuild.1"
+  default     = "v1.31.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
 variable "coredns_version" {
   type        = string
-  default     = "v1.10.1-eksbuild.7"
+  default     = "v1.10.1-eksbuild.11"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
 variable "kube_proxy_version" {
   type        = string
-  default     = "v1.28.6-eksbuild.2	"
+  default     = "v1.28.8-eksbuild.5"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -90,7 +90,7 @@ variable "node_pools" {
     name               = "default-pool"
     node_count         = 1
     instance_type      = "t3a.large"
-    ami_image_id       = "ami-04fd8e3a70c3778b2"
+    ami_image_id       = "ami-0408823a87d4095d9"
     spot               = false
     disk_size_gb       = 20
     max_pods           = 110
