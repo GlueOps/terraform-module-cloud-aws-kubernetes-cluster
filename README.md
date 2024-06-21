@@ -27,7 +27,7 @@ module "captain" {
   node_pools = [
 #    {
 #      "ami_image_id" : "ami-0408823a87d4095d9",
-#      "instance_type" : "t3a.xlarge",
+#      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
 #      "node_count" : 4,
 #      "spot" : false,
@@ -47,7 +47,7 @@ module "captain" {
 #    },
 #    {
 #      "ami_image_id" : "ami-0408823a87d4095d9",
-#      "instance_type" : "t3a.xlarge",
+#      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
 #      "node_count" : 2,
 #      "spot" : false,
@@ -67,9 +67,9 @@ module "captain" {
 #    },
 #    {
 #      "ami_image_id" : "ami-0408823a87d4095d9",
-#      "instance_type" : "t3a.large",
+#      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
-#      "node_count" : 4,
+#      "node_count" : 2,
 #      "spot" : false,
 #      "disk_size_gb" : 20,
 #      "max_pods" : 110,
