@@ -10,7 +10,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_image_id" : "ami-0be1daad79c89dd0a",
+#      "ami_image_id" : "ami-084763992995b8d9e",
 #      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
 #      "node_count" : 4,
@@ -30,7 +30,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_image_id" : "ami-0be1daad79c89dd0a",
+#      "ami_image_id" : "ami-084763992995b8d9e",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
 #      "node_count" : 2,
@@ -50,7 +50,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_image_id" : "ami-0be1daad79c89dd0a",
+#      "ami_image_id" : "ami-084763992995b8d9e",
 #      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
 #      "node_count" : 2,

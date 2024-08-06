@@ -26,7 +26,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_image_id" : "ami-0be1daad79c89dd0a",
+#      "ami_image_id" : "ami-084763992995b8d9e",
 #      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
 #      "node_count" : 4,
@@ -46,7 +46,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_image_id" : "ami-0be1daad79c89dd0a",
+#      "ami_image_id" : "ami-084763992995b8d9e",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
 #      "node_count" : 2,
@@ -66,7 +66,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_image_id" : "ami-0be1daad79c89dd0a",
+#      "ami_image_id" : "ami-084763992995b8d9e",
 #      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
 #      "node_count" : 2,
@@ -195,7 +195,7 @@ No requirements.
 | <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The version of EKS to deploy | `string` | `"1.27"` | no |
 | <a name="input_iam_role_to_assume"></a> [iam\_role\_to\_assume](#input\_iam\_role\_to\_assume) | The full ARN of the IAM role to assume | `string` | n/a | yes |
 | <a name="input_kube_proxy_version"></a> [kube\_proxy\_version](#input\_kube\_proxy\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html | `string` | `"v1.28.8-eksbuild.5"` | no |
-| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | node pool configurations:<br>  - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name<br>  - node\_count (number): number of nodes to create in the node pool.<br>  - instance\_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/<br>  - ami\_image\_id (string): AMI image ID to use for EKS worker nodes. This varies per region!! ref: https://github.com/awslabs/amazon-eks-ami/releases to find the AMI ID go to the console: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#Images:visibility=public-images;search=amazon-eks-node-1.28-v20230703<br>  - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!<br>  - disk\_size\_gb (number): Disk size in GB for the nodes.<br>  - max\_pods (number): max pods that can be scheduled per node.<br>  - ssh\_key\_pair\_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:<br>  - kubernetes\_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/<br>  - kubernetes\_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/ | <pre>list(object({<br>    name               = string<br>    node_count         = number<br>    instance_type      = string<br>    ami_image_id       = string<br>    spot               = bool<br>    disk_size_gb       = number<br>    max_pods           = number<br>    ssh_key_pair_names = list(string)<br>    kubernetes_labels  = map(string)<br>    kubernetes_taints = list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br><br>  }))</pre> | <pre>[<br>  {<br>    "ami_image_id": "ami-0be1daad79c89dd0a",<br>    "disk_size_gb": 20,<br>    "instance_type": "t3a.large",<br>    "kubernetes_labels": {},<br>    "kubernetes_taints": [],<br>    "max_pods": 110,<br>    "name": "default-pool",<br>    "node_count": 1,<br>    "spot": false,<br>    "ssh_key_pair_names": []<br>  }<br>]</pre> | no |
+| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | node pool configurations:<br>  - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name<br>  - node\_count (number): number of nodes to create in the node pool.<br>  - instance\_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/<br>  - ami\_image\_id (string): AMI image ID to use for EKS worker nodes. This varies per region!! ref: https://github.com/awslabs/amazon-eks-ami/releases to find the AMI ID go to the console: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#Images:visibility=public-images;search=amazon-eks-node-1.28-v20230703<br>  - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!<br>  - disk\_size\_gb (number): Disk size in GB for the nodes.<br>  - max\_pods (number): max pods that can be scheduled per node.<br>  - ssh\_key\_pair\_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:<br>  - kubernetes\_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/<br>  - kubernetes\_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/ | <pre>list(object({<br>    name               = string<br>    node_count         = number<br>    instance_type      = string<br>    ami_image_id       = string<br>    spot               = bool<br>    disk_size_gb       = number<br>    max_pods           = number<br>    ssh_key_pair_names = list(string)<br>    kubernetes_labels  = map(string)<br>    kubernetes_taints = list(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br><br>  }))</pre> | <pre>[<br>  {<br>    "ami_image_id": "ami-084763992995b8d9e",<br>    "disk_size_gb": 20,<br>    "instance_type": "t3a.large",<br>    "kubernetes_labels": {},<br>    "kubernetes_taints": [],<br>    "max_pods": 110,<br>    "name": "default-pool",<br>    "node_count": 1,<br>    "spot": false,<br>    "ssh_key_pair_names": []<br>  }<br>]</pre> | no |
 | <a name="input_peering_configs"></a> [peering\_configs](#input\_peering\_configs) | A list of maps containing VPC peering configuration details | <pre>list(object({<br>    vpc_peering_connection_id = string<br>    destination_cidr_block    = string<br>  }))</pre> | `[]` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
 | <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0/26"` | no |
