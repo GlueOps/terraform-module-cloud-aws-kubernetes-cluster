@@ -12,7 +12,8 @@ module "node_pool" {
   max_size              = each.value.node_count + 1
   cluster_name          = module.kubernetes.eks_cluster_id
   capacity_type         = each.value.spot ? "SPOT" : "ON_DEMAND"
-  ami_image_id          = [each.value.ami_image_id]
+  ami_release_version          = [each.value.ami_release_version]
+  ami_type              = each.value.ami_type
   kubernetes_labels     = each.value.kubernetes_labels
   kubernetes_taints     = each.value.kubernetes_taints
   create_before_destroy = false
