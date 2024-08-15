@@ -70,10 +70,11 @@ variable "eks_version" {
 
 variable "node_pools" {
   type = list(object({
-    name               = string
-    node_count         = number
-    instance_type      = string
-    ami_image_id       = string
+    name                = string
+    node_count          = number
+    instance_type       = string
+    ami_release_version = string
+    ami_type  = string
     spot               = bool
     disk_size_gb       = number
     max_pods           = number
@@ -90,7 +91,8 @@ variable "node_pools" {
     name               = "default-pool"
     node_count         = 1
     instance_type      = "t3a.large"
-    ami_image_id       = "ami-0a62f3a52fa691069"
+    ami_release_version = "1.29.6-20240807"
+    ami_type = "AL2_x86_64"
     spot               = false
     disk_size_gb       = 20
     max_pods           = 110
