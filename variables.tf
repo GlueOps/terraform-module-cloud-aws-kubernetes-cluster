@@ -74,12 +74,12 @@ variable "node_pools" {
     node_count          = number
     instance_type       = string
     ami_release_version = string
-    ami_type  = string
-    spot               = bool
-    disk_size_gb       = number
-    max_pods           = number
-    ssh_key_pair_names = list(string)
-    kubernetes_labels  = map(string)
+    ami_type            = string
+    spot                = bool
+    disk_size_gb        = number
+    max_pods            = number
+    ssh_key_pair_names  = list(string)
+    kubernetes_labels   = map(string)
     kubernetes_taints = list(object({
       key    = string
       value  = string
@@ -88,17 +88,17 @@ variable "node_pools" {
 
   }))
   default = [{
-    name               = "default-pool"
-    node_count         = 1
-    instance_type      = "t3a.large"
+    name                = "default-pool"
+    node_count          = 1
+    instance_type       = "t3a.large"
     ami_release_version = "1.29.6-20240807"
-    ami_type = "AL2_x86_64"
-    spot               = false
-    disk_size_gb       = 20
-    max_pods           = 110
-    ssh_key_pair_names = []
-    kubernetes_labels  = {}
-    kubernetes_taints  = []
+    ami_type            = "AL2_x86_64"
+    spot                = false
+    disk_size_gb        = 20
+    max_pods            = 110
+    ssh_key_pair_names  = []
+    kubernetes_labels   = {}
+    kubernetes_taints   = []
   }]
   description = <<-DESC
   node pool configurations:

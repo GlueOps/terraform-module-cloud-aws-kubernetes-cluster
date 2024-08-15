@@ -64,7 +64,7 @@ resource "aws_eks_addon" "coredns" {
   service_account_role_arn = aws_iam_role.eks_addon_ebs_csi_role.arn
   depends_on               = [module.node_pool]
   count                    = length(var.node_pools) > 0 ? 1 : 0
-  configuration_values = local.coredns_addon_node_tolerations
+  configuration_values     = local.coredns_addon_node_tolerations
 }
 
 
@@ -75,6 +75,6 @@ resource "aws_eks_addon" "kube_proxy" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
 
-  depends_on               = [module.node_pool]
-  count                    = length(var.node_pools) > 0 ? 1 : 0
+  depends_on = [module.node_pool]
+  count      = length(var.node_pools) > 0 ? 1 : 0
 }

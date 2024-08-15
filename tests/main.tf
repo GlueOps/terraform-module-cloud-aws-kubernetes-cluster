@@ -1,5 +1,5 @@
 module "captain" {
-  iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role" 
+  iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
   eks_version        = "1.28"
   csi_driver_version = "v1.33.0-eksbuild.1"
@@ -9,60 +9,60 @@ module "captain" {
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
-#    {
-#      "ami_release_version" : "1.28.11-20240807",
-#      "ami_type" : "AL2_x86_64",
-#      "instance_type" : "t3a.large",
-#      "name" : "glueops-platform-node-pool-1",
-#      "node_count" : 4,
-#      "spot" : false,
-#      "disk_size_gb" : 20,
-#      "max_pods" : 110,
-#      "ssh_key_pair_names" : [],
-#      "kubernetes_labels" : {
-#        "glueops.dev/role" : "glueops-platform"
-#      },
-#      "kubernetes_taints" : [
-#        {
-#          key    = "glueops.dev/role"
-#          value  = "glueops-platform"
-#          effect = "NO_SCHEDULE"
-#        }
-#      ]
-#    },
-#    {
-#      "ami_release_version" : "1.28.11-20240807",
-#      "ami_type" : "AL2_x86_64",
-#      "instance_type" : "t3a.small",
-#      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
-#      "node_count" : 2,
-#      "spot" : false,
-#      "disk_size_gb" : 20,
-#      "max_pods" : 110,
-#      "ssh_key_pair_names" : [],
-#      "kubernetes_labels" : {
-#        "glueops.dev/role" : "glueops-platform-argocd-app-controller"
-#      },
-#      "kubernetes_taints" : [
-#        {
-#          key    = "glueops.dev/role"
-#          value  = "glueops-platform-argocd-app-controller"
-#          effect = "NO_SCHEDULE"
-#        }
-#      ]
-#    },
-#    {
-#      "ami_release_version" : "1.28.11-20240807",
-#      "ami_type" : "AL2_x86_64",
-#      "instance_type" : "t3a.medium",
-#      "name" : "clusterwide-node-pool-1",
-#      "node_count" : 2,
-#      "spot" : false,
-#      "disk_size_gb" : 20,
-#      "max_pods" : 110,
-#      "ssh_key_pair_names" : [],
-#      "kubernetes_labels" : {},
-#      "kubernetes_taints" : []
-#    }
+    #    {
+    #      "ami_release_version" : "1.28.11-20240807",
+    #      "ami_type" : "AL2_x86_64",
+    #      "instance_type" : "t3a.large",
+    #      "name" : "glueops-platform-node-pool-1",
+    #      "node_count" : 4,
+    #      "spot" : false,
+    #      "disk_size_gb" : 20,
+    #      "max_pods" : 110,
+    #      "ssh_key_pair_names" : [],
+    #      "kubernetes_labels" : {
+    #        "glueops.dev/role" : "glueops-platform"
+    #      },
+    #      "kubernetes_taints" : [
+    #        {
+    #          key    = "glueops.dev/role"
+    #          value  = "glueops-platform"
+    #          effect = "NO_SCHEDULE"
+    #        }
+    #      ]
+    #    },
+    #    {
+    #      "ami_release_version" : "1.28.11-20240807",
+    #      "ami_type" : "AL2_x86_64",
+    #      "instance_type" : "t3a.small",
+    #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
+    #      "node_count" : 2,
+    #      "spot" : false,
+    #      "disk_size_gb" : 20,
+    #      "max_pods" : 110,
+    #      "ssh_key_pair_names" : [],
+    #      "kubernetes_labels" : {
+    #        "glueops.dev/role" : "glueops-platform-argocd-app-controller"
+    #      },
+    #      "kubernetes_taints" : [
+    #        {
+    #          key    = "glueops.dev/role"
+    #          value  = "glueops-platform-argocd-app-controller"
+    #          effect = "NO_SCHEDULE"
+    #        }
+    #      ]
+    #    },
+    #    {
+    #      "ami_release_version" : "1.28.11-20240807",
+    #      "ami_type" : "AL2_x86_64",
+    #      "instance_type" : "t3a.medium",
+    #      "name" : "clusterwide-node-pool-1",
+    #      "node_count" : 2,
+    #      "spot" : false,
+    #      "disk_size_gb" : 20,
+    #      "max_pods" : 110,
+    #      "ssh_key_pair_names" : [],
+    #      "kubernetes_labels" : {},
+    #      "kubernetes_taints" : []
+    #    }
   ]
 }
