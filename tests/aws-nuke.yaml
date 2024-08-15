@@ -25,6 +25,10 @@ presets:
       IAMUserAccessKey:
       - "glueops-deployment-svc -> AKIA3COQJC7C2PNUKZV4" #Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called AND change `ABCDEFGHIJKLMNOPQRST` to whatever the AccessKey ID actually is from when you created it.
 
+resource-types:
+  excludes:
+    # don't nuke OpenSearch Packages, see https://github.com/rebuy-de/aws-nuke/issues/1123
+    - OSPackage
 
 
 regions: #this regions list was last updated on April 2, 2022.
