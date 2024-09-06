@@ -26,7 +26,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_release_version" : "1.28.11-20240807",
+#      "ami_release_version" : "1.28.11-20240828",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
@@ -47,7 +47,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_release_version" : "1.28.11-20240807",
+#      "ami_release_version" : "1.28.11-20240828",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -68,7 +68,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_release_version" : "1.28.11-20240807",
+#      "ami_release_version" : "1.28.11-20240828",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
