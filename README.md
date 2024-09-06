@@ -18,15 +18,15 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain-role"
   source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.28"
-  csi_driver_version = "v1.33.0-eksbuild.1"
-  coredns_version    = "v1.10.1-eksbuild.11"
-  kube_proxy_version = "v1.28.8-eksbuild.5"
+  csi_driver_version = "v1.34.0-eksbuild.1"
+  coredns_version    = "v1.10.1-eksbuild.13"
+  kube_proxy_version = "v1.28.12-eksbuild.2"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
-#      "ami_release_version" : "1.28.11-20240807",
+#      "ami_release_version" : "1.28.11-20240828",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
@@ -47,7 +47,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_release_version" : "1.28.11-20240807",
+#      "ami_release_version" : "1.28.11-20240828",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -68,7 +68,7 @@ module "captain" {
 #      ]
 #    },
 #    {
-#      "ami_release_version" : "1.28.11-20240807",
+#      "ami_release_version" : "1.28.11-20240828",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
