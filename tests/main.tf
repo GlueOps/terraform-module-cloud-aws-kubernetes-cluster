@@ -10,6 +10,7 @@ module "captain" {
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
     #    {
+    #      "kubernetes_version" : "1.28",
     #      "ami_release_version" : "1.28.11-20240828",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.large",
@@ -31,6 +32,7 @@ module "captain" {
     #      ]
     #    },
     #    {
+    #      "kubernetes_version" : "1.28",
     #      "ami_release_version" : "1.28.11-20240828",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.small",
@@ -52,6 +54,7 @@ module "captain" {
     #      ]
     #    },
     #    {
+    #      "kubernetes_version" : "1.28",
     #      "ami_release_version" : "1.28.11-20240828",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.medium",
