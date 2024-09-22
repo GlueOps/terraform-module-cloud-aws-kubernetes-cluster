@@ -112,6 +112,7 @@ variable "node_pools" {
     - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
     - kubernetes_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     - kubernetes_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+    - kubernetes_version (string): Generally this is the same version as the EKS cluster. But if doing a node pool upgrade this may be a different version.
   DESC
 }
 
