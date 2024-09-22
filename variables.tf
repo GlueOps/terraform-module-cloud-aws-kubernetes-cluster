@@ -73,8 +73,8 @@ variable "node_pools" {
     name                = string
     node_count          = number
     instance_type       = string
-    ami_release_version = string
     kubernetes_version  = string
+    ami_release_version = string
     ami_type            = string
     spot                = bool
     disk_size_gb        = number
