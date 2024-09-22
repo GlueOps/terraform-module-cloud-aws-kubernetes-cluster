@@ -99,6 +99,7 @@ variable "node_pools" {
     ssh_key_pair_names  = []
     kubernetes_labels   = {}
     kubernetes_taints   = []
+    kubernetes_version  = "1.29"
   }]
   description = <<-DESC
   node pool configurations:
