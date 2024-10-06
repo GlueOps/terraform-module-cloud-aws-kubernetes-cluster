@@ -73,6 +73,7 @@ variable "node_pools" {
     name                = string
     node_count          = number
     instance_type       = string
+    kubernetes_version  = string
     ami_release_version = string
     ami_type            = string
     spot                = bool
@@ -92,6 +93,7 @@ variable "node_pools" {
     node_count          = 1
     instance_type       = "t3a.large"
     ami_release_version = "1.29.6-20240807"
+    kubernetes_version  = "1.29"
     ami_type            = "AL2_x86_64"
     spot                = false
     disk_size_gb        = 20
@@ -105,7 +107,9 @@ variable "node_pools" {
     - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
     - node_count (number): number of nodes to create in the node pool.
     - instance_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/
-    - ami_image_id (string): AMI image ID to use for EKS worker nodes. This varies per region!! ref: https://github.com/awslabs/amazon-eks-ami/releases to find the AMI ID go to the console: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#Images:visibility=public-images;search=amazon-eks-node-1.28-v20230703
+    - kubernetes_version (string): Generally this is the same version as the EKS cluster. But if doing a node pool upgrade this may be a different version.
+    - ami_release_version (string): AMI Release version to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases
+    - ami_type (string): e.g. AMD64 or ARM
     - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
     - disk_size_gb (number): Disk size in GB for the nodes.
     - max_pods (number): max pods that can be scheduled per node.

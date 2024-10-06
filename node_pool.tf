@@ -17,6 +17,7 @@ module "node_pool" {
   kubernetes_labels     = each.value.kubernetes_labels
   kubernetes_taints     = each.value.kubernetes_taints
   create_before_destroy = false
+  kubernetes_version    = [each.value.kubernetes_version]
 
   cluster_autoscaler_enabled = false
   name                       = each.value.name
