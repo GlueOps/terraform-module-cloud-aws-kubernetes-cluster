@@ -11,6 +11,7 @@ jobs:
     concurrency:
       group: aws_regression_suite
       cancel-in-progress: true
+    workflow_dispatch:
 
     steps:
     - name: Checkout code
