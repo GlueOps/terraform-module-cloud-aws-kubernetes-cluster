@@ -3,7 +3,6 @@ module "captain" {
   source             = "../"
   eks_version        = "1.28"
   csi_driver_version = "v1.35.0-eksbuild.1"
-  # Update README.md and docs/.header.md with the same version
   coredns_version    = "v1.10.1-eksbuild.13"
   kube_proxy_version = "v1.28.12-eksbuild.5"
   vpc_cidr_block     = "10.65.0.0/26"
