@@ -3,6 +3,7 @@ name: AWS Regression Suite
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
 
 jobs:
   run_docker:
@@ -11,7 +12,6 @@ jobs:
     concurrency:
       group: aws_regression_suite
       cancel-in-progress: true
-  workflow_dispatch:
 
     steps:
     - name: Checkout code
