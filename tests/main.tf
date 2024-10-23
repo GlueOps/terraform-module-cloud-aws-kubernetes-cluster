@@ -2,7 +2,7 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
   eks_version        = "1.28"
-  csi_driver_version = "v1.35.0-eksbuild.1"
+  csi_driver_version = "v1.36.0-eksbuild.1"
   coredns_version    = "v1.10.1-eksbuild.13"
   kube_proxy_version = "v1.28.12-eksbuild.5"
   vpc_cidr_block     = "10.65.0.0/26"
@@ -11,7 +11,7 @@ module "captain" {
   node_pools = [
     #    {
     #      "kubernetes_version" : "1.28",
-    #      "ami_release_version" : "1.28.13-20240928",
+    #      "ami_release_version" : "1.28.13-20241011",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -33,7 +33,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.28",
-    #      "ami_release_version" : "1.28.13-20240928",
+    #      "ami_release_version" : "1.28.13-20241011",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.small",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -55,7 +55,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.28",
-    #      "ami_release_version" : "1.28.13-20240928",
+    #      "ami_release_version" : "1.28.13-20241011",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",

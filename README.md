@@ -18,7 +18,7 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain-role"
   source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.28"
-  csi_driver_version = "v1.35.0-eksbuild.1"
+  csi_driver_version = "v1.36.0-eksbuild.1"
   coredns_version    = "v1.10.1-eksbuild.13"
   kube_proxy_version = "v1.28.12-eksbuild.5"
   vpc_cidr_block     = "10.65.0.0/26"
@@ -27,7 +27,7 @@ module "captain" {
   node_pools = [
 #    {
 #      "kubernetes_version" : "1.28",
-#      "ami_release_version" : "1.28.13-20240928",
+#      "ami_release_version" : "1.28.13-20241011",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
@@ -49,7 +49,7 @@ module "captain" {
 #    },
 #    {
 #      "kubernetes_version" : "1.28",
-#      "ami_release_version" : "1.28.13-20240928",
+#      "ami_release_version" : "1.28.13-20241011",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -71,7 +71,7 @@ module "captain" {
 #    },
 #    {
 #      "kubernetes_version" : "1.28",
-#      "ami_release_version" : "1.28.13-20240928",
+#      "ami_release_version" : "1.28.13-20241011",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
@@ -196,7 +196,7 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | The availability zones to deploy into | `list(string)` | <pre>[<br/>  "us-west-2a",<br/>  "us-west-2b",<br/>  "us-west-2c"<br/>]</pre> | no |
 | <a name="input_coredns_version"></a> [coredns\_version](#input\_coredns\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html | `string` | `"v1.10.1-eksbuild.11"` | no |
-| <a name="input_csi_driver_version"></a> [csi\_driver\_version](#input\_csi\_driver\_version) | You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md | `string` | `"v1.33.0-eksbuild.1"` | no |
+| <a name="input_csi_driver_version"></a> [csi\_driver\_version](#input\_csi\_driver\_version) | You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md | `string` | `"v1.36.0-eksbuild.1"` | no |
 | <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The version of EKS to deploy | `string` | `"1.27"` | no |
 | <a name="input_iam_role_to_assume"></a> [iam\_role\_to\_assume](#input\_iam\_role\_to\_assume) | The full ARN of the IAM role to assume | `string` | n/a | yes |
 | <a name="input_kube_proxy_version"></a> [kube\_proxy\_version](#input\_kube\_proxy\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html | `string` | `"v1.28.8-eksbuild.5"` | no |
