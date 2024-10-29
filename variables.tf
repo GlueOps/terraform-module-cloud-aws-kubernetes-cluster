@@ -11,13 +11,13 @@ variable "csi_driver_version" {
 
 variable "coredns_version" {
   type        = string
-  default     = "v1.10.1-eksbuild.11"
+  default     = "v1.11.3-eksbuild.1"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
 variable "kube_proxy_version" {
   type        = string
-  default     = "v1.28.8-eksbuild.5"
+  default     = "v1.29.7-eksbuild.5"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
