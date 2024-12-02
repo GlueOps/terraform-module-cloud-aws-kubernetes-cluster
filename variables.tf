@@ -17,7 +17,7 @@ variable "coredns_version" {
 
 variable "kube_proxy_version" {
   type        = string
-  default     = "v1.29.10-eksbuild.2"
+  default     = "v1.29.10-eksbuild.3"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -92,7 +92,7 @@ variable "node_pools" {
     name                = "default-pool"
     node_count          = 1
     instance_type       = "t3a.large"
-    ami_release_version = "1.29.8-20241109"
+    ami_release_version = "1.29.10-20241121"
     kubernetes_version  = "1.29"
     ami_type            = "AL2_x86_64"
     spot                = false
