@@ -65,7 +65,7 @@ variable "availability_zones" {
 variable "eks_version" {
   type        = string
   description = "The version of EKS to deploy"
-  default     = "1.27"
+  default     = "1.30"
 }
 
 variable "node_pools" {
