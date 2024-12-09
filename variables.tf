@@ -24,11 +24,17 @@ variable "kube_proxy_version" {
 
 locals {
 
-  csi_addon_node_tolerations = jsonencode({
+  map_csi_addon_node_tolerations = {
     controller = local.nodeselector_and_pod_tolerations
+  }
+  
+  map_csi_default_storage = {
+    defaultStorageClass = {
+      enabled = true
+    }
+  }
 
-  })
-
+  csi_addon_node_tolerations = jsonencode(merge(local.map_csi_addon_node_tolerations, local.map_csi_default_storage))
 
   nodeselector_and_pod_tolerations = {
     nodeSelector = {
