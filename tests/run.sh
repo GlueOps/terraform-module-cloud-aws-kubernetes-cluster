@@ -18,6 +18,10 @@ echo "::endgroup::"
 echo "::group::Configuring Kubernetes"
 echo "Authenticate with Kubernetes"
 aws eks update-kubeconfig --region us-west-2 --name captain-cluster --role-arn arn:aws:iam::761182885829:role/glueops-captain-role
+
+echo "Show current storageclasses (immediately after bootstrap)"
+kubectl get storageclass -A
+
 echo "Delete AWS CNI"
 kubectl delete daemonset -n kube-system aws-node
 echo "Install Calico CNI"
@@ -34,6 +38,9 @@ echo "Get nodes and pods from kubernetes"
 kubectl get nodes
 kubectl get pods -A -o=wide
 echo "::endgroup::"
+
+echo "Show current storageclasses (before test suite)"
+kubectl get storageclass -A
 
 echo "==> Start Test Suite"
 ./k8s-test.sh
