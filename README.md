@@ -18,16 +18,16 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain-role"
   source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.30"
-  csi_driver_version = "v1.37.0-eksbuild.1"
-  coredns_version    = "v1.11.3-eksbuild.2"
-  kube_proxy_version = "v1.30.6-eksbuild.3"
+  csi_driver_version = "v1.38.1-eksbuild.1"
+  coredns_version    = "v1.11.4-eksbuild.2"
+  kube_proxy_version = "v1.30.7-eksbuild.2"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
   node_pools = [
 #    {
 #      "kubernetes_version" : "1.30",
-#      "ami_release_version" : "1.30.6-20241121",
+#      "ami_release_version" : "1.30.7-20250103",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.large",
 #      "name" : "glueops-platform-node-pool-1",
@@ -49,7 +49,7 @@ module "captain" {
 #    },
 #    {
 #      "kubernetes_version" : "1.30",
-#      "ami_release_version" : "1.30.6-20241121",
+#      "ami_release_version" : "1.30.7-20250103",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.small",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -71,7 +71,7 @@ module "captain" {
 #    },
 #    {
 #      "kubernetes_version" : "1.30",
-#      "ami_release_version" : "1.30.6-20241121",
+#      "ami_release_version" : "1.30.7-20250103",
 #      "ami_type" : "AL2_x86_64",
 #      "instance_type" : "t3a.medium",
 #      "name" : "clusterwide-node-pool-1",
@@ -195,12 +195,12 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | The availability zones to deploy into | `list(string)` | <pre>[<br/>  "us-west-2a",<br/>  "us-west-2b",<br/>  "us-west-2c"<br/>]</pre> | no |
-| <a name="input_coredns_version"></a> [coredns\_version](#input\_coredns\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html | `string` | `"v1.11.3-eksbuild.2"` | no |
-| <a name="input_csi_driver_version"></a> [csi\_driver\_version](#input\_csi\_driver\_version) | You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md | `string` | `"v1.37.0-eksbuild.1"` | no |
+| <a name="input_coredns_version"></a> [coredns\_version](#input\_coredns\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html | `string` | `"v1.11.4-eksbuild.2"` | no |
+| <a name="input_csi_driver_version"></a> [csi\_driver\_version](#input\_csi\_driver\_version) | You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md | `string` | `"v1.38.1-eksbuild.1"` | no |
 | <a name="input_eks_version"></a> [eks\_version](#input\_eks\_version) | The version of EKS to deploy | `string` | `"1.30"` | no |
 | <a name="input_iam_role_to_assume"></a> [iam\_role\_to\_assume](#input\_iam\_role\_to\_assume) | The full ARN of the IAM role to assume | `string` | n/a | yes |
-| <a name="input_kube_proxy_version"></a> [kube\_proxy\_version](#input\_kube\_proxy\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html | `string` | `"v1.30.6-eksbuild.3"` | no |
-| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | node pool configurations:<br/>  - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name<br/>  - node\_count (number): number of nodes to create in the node pool.<br/>  - instance\_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/<br/>  - kubernetes\_version (string): Generally this is the same version as the EKS cluster. But if doing a node pool upgrade this may be a different version.<br/>  - ami\_release\_version (string): AMI Release version to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases<br/>  - ami\_type (string): e.g. AMD64 or ARM<br/>  - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!<br/>  - disk\_size\_gb (number): Disk size in GB for the nodes.<br/>  - max\_pods (number): max pods that can be scheduled per node.<br/>  - ssh\_key\_pair\_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:<br/>  - kubernetes\_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/<br/>  - kubernetes\_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/ | <pre>list(object({<br/>    name                = string<br/>    node_count          = number<br/>    instance_type       = string<br/>    kubernetes_version  = string<br/>    ami_release_version = string<br/>    ami_type            = string<br/>    spot                = bool<br/>    disk_size_gb        = number<br/>    max_pods            = number<br/>    ssh_key_pair_names  = list(string)<br/>    kubernetes_labels   = map(string)<br/>    kubernetes_taints = list(object({<br/>      key    = string<br/>      value  = string<br/>      effect = string<br/>    }))<br/><br/>  }))</pre> | <pre>[<br/>  {<br/>    "ami_release_version": "1.30.6-20241121",<br/>    "ami_type": "AL2_x86_64",<br/>    "disk_size_gb": 20,<br/>    "instance_type": "t3a.large",<br/>    "kubernetes_labels": {},<br/>    "kubernetes_taints": [],<br/>    "kubernetes_version": "1.30",<br/>    "max_pods": 110,<br/>    "name": "default-pool",<br/>    "node_count": 1,<br/>    "spot": false,<br/>    "ssh_key_pair_names": []<br/>  }<br/>]</pre> | no |
+| <a name="input_kube_proxy_version"></a> [kube\_proxy\_version](#input\_kube\_proxy\_version) | You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html | `string` | `"v1.30.7-eksbuild.2"` | no |
+| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | node pool configurations:<br/>  - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name<br/>  - node\_count (number): number of nodes to create in the node pool.<br/>  - instance\_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/<br/>  - kubernetes\_version (string): Generally this is the same version as the EKS cluster. But if doing a node pool upgrade this may be a different version.<br/>  - ami\_release\_version (string): AMI Release version to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases<br/>  - ami\_type (string): e.g. AMD64 or ARM<br/>  - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!<br/>  - disk\_size\_gb (number): Disk size in GB for the nodes.<br/>  - max\_pods (number): max pods that can be scheduled per node.<br/>  - ssh\_key\_pair\_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:<br/>  - kubernetes\_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/<br/>  - kubernetes\_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/ | <pre>list(object({<br/>    name                = string<br/>    node_count          = number<br/>    instance_type       = string<br/>    kubernetes_version  = string<br/>    ami_release_version = string<br/>    ami_type            = string<br/>    spot                = bool<br/>    disk_size_gb        = number<br/>    max_pods            = number<br/>    ssh_key_pair_names  = list(string)<br/>    kubernetes_labels   = map(string)<br/>    kubernetes_taints = list(object({<br/>      key    = string<br/>      value  = string<br/>      effect = string<br/>    }))<br/><br/>  }))</pre> | <pre>[<br/>  {<br/>    "ami_release_version": "1.30.7-20250103",<br/>    "ami_type": "AL2_x86_64",<br/>    "disk_size_gb": 20,<br/>    "instance_type": "t3a.large",<br/>    "kubernetes_labels": {},<br/>    "kubernetes_taints": [],<br/>    "kubernetes_version": "1.30",<br/>    "max_pods": 110,<br/>    "name": "default-pool",<br/>    "node_count": 1,<br/>    "spot": false,<br/>    "ssh_key_pair_names": []<br/>  }<br/>]</pre> | no |
 | <a name="input_peering_configs"></a> [peering\_configs](#input\_peering\_configs) | A list of maps containing VPC peering configuration details | <pre>list(object({<br/>    vpc_peering_connection_id = string<br/>    destination_cidr_block    = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_region"></a> [region](#input\_region) | The AWS region to deploy into | `string` | n/a | yes |
 | <a name="input_vpc_cidr_block"></a> [vpc\_cidr\_block](#input\_vpc\_cidr\_block) | The CIDR block for the VPC | `string` | `"10.65.0.0/26"` | no |
