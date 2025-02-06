@@ -32,7 +32,7 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: alpine-daemonset-argocd
+  name: alpine-daemonset-glueops
   namespace: test-pods-creation
 spec:
   selector:
@@ -58,7 +58,7 @@ spec:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: alpine-daemonset-argocd
+  name: alpine-daemonset
   namespace: test-pods-creation
 spec:
   selector:
