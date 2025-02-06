@@ -2,6 +2,37 @@
 
 set -e
 
+# Step 1: Verify pods can get created on the current ami_release_version
+echo "::group::Creating pods on every node in the cluster"
+for node in $(kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'); do
+  kubectl run -n test-pods-creation  alpine-on-$node \
+    --image=alpine:latest \
+    --overrides='{
+      "apiVersion": "v1",
+      "kind": "Pod",
+      "spec": {
+        "nodeName": "'"$node"'",
+        "containers": [{
+          "name": "alpine",
+          "image": "alpine:latest",
+          "command": ["/bin/sh", "-c", "while true; do echo Running on $(hostname); sleep 3600; done"]
+        }]
+      }
+    }'
+done
+sleep 300
+echo "::group::Checking the all pods are in running state"
+POD_COUNT=$(kubectl get pods -n test-pods-creation --field-selector=status.phase=Running  --no-headers | wc -l)
+echo "::group::Comparing number of running pods to the desired count"
+if [ "$POD_COUNT" -ne 8 ]; then
+  echo "Expected 8 pods, but found $POD_COUNT."
+  exit 1
+else
+  echo "Pod count matches expected value: $POD_COUNT."
+fi
+kubectl delete pods --all -n test-pods-creation
+echo "::endgroup::"
+
 # Step 1: Verify storage driver installation (Amazon EBS CSI Driver)
 echo "::group::Checking if the storage driver is installed..."
 kubectl get pods -n kube-system | grep "ebs-csi-"
