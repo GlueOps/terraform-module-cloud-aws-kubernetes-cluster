@@ -15,6 +15,7 @@ if [ "$POD_COUNT" -ne 8 ]; then
 else
   echo "Pod count matches expected value: $POD_COUNT."
 fi
+kubectl delete -f daemonset.yaml
 
 # Step 1: Verify storage driver installation (Amazon EBS CSI Driver)
 echo "::group::Checking if the storage driver is installed..."
