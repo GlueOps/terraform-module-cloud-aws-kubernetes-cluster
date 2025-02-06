@@ -11,7 +11,7 @@ module "captain" {
   node_pools = [
     #    {
     #      "kubernetes_version" : "1.30",
-    #      "ami_release_version" : "1.30.8-20250116",
+    #      "ami_release_version" : "1.30.8-20250123",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -33,7 +33,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.30",
-    #      "ami_release_version" : "1.30.8-20250116",
+    #      "ami_release_version" : "1.30.8-20250123",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.small",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -55,7 +55,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.30",
-    #      "ami_release_version" : "1.30.8-20250116",
+    #      "ami_release_version" : "1.30.8-20250123",
     #      "ami_type" : "AL2_x86_64",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",

@@ -2,6 +2,20 @@
 
 set -e
 
+# Step 1: Verify pods can get created on the current ami_release_version
+echo "::group::Creating daemonset on every node in the cluster"
+kubectl apply -f daemonset.yaml
+echo "::group::Checking the all pods are in running state"
+POD_COUNT=$(kubectl get pods -n test-pods-creation --field-selector=status.phase=Running  --no-headers | wc -l)
+
+echo "::group::Comparing number of running pods to the desired count"
+if [ "$POD_COUNT" -ne 8 ]; then
+  echo "Expected 8 pods, but found $POD_COUNT."
+  exit 1
+else
+  echo "Pod count matches expected value: $POD_COUNT."
+fi
+
 # Step 1: Verify storage driver installation (Amazon EBS CSI Driver)
 echo "::group::Checking if the storage driver is installed..."
 kubectl get pods -n kube-system | grep "ebs-csi-"
