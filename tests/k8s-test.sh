@@ -8,6 +8,8 @@ kubectl apply -f daemonset.yaml
 echo "::group::Checking the all pods are in running state"
 POD_COUNT=$(kubectl get pods -n test-pods-creation --field-selector=status.phase=Running  --no-headers | wc -l)
 
+sleep 300
+
 echo "::group::Comparing number of running pods to the desired count"
 if [ "$POD_COUNT" -ne 8 ]; then
   echo "Expected 8 pods, but found $POD_COUNT."
