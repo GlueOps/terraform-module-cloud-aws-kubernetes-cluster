@@ -21,6 +21,14 @@ module "subnets" {
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
+  public_subnets_additional_tags = {
+    "kubernetes.io/role/elb" = 1
+    "kubernetes.io/cluster/captain" = "shared"
+
+  }
+  private_subnets_additional_tags = {
+    "kubernetes.io/role/internal-elb" = 1
+  }
 }
 
 resource "aws_security_group" "captain" {
