@@ -1,12 +1,12 @@
 
-module "node_pool" {
-  for_each = { for np in var.node_pools : np.name => np }
+module "private_node_pool" {
+  for_each = { for np in var.private_node_pools : np.name => np }
   source   = "cloudposse/eks-node-group/aws"
   # Cloud Posse recommends pinning every module to a specific version
   version               = "3.1.1"
   ec2_ssh_key_name      = each.value.ssh_key_pair_names
   instance_types        = [each.value.instance_type]
-  subnet_ids            = module.subnets.public_subnet_ids
+  subnet_ids            = module.subnets.private_subnet_ids
   desired_size          = each.value.node_count
   min_size              = each.value.node_count
   max_size              = each.value.node_count + 1
