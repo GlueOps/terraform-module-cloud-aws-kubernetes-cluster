@@ -14,10 +14,10 @@ module "subnets" {
 
   vpc_id                  = module.vpc.vpc_id
   igw_id                  = [module.vpc.igw_id]
-  nat_gateway_enabled     = false
+  nat_gateway_enabled     = true
   nat_instance_enabled    = false
   name                    = "captain"
-  private_subnets_enabled = false
+  private_subnets_enabled = true
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
