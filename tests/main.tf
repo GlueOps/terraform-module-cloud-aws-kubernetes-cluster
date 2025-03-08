@@ -8,6 +8,7 @@ module "captain" {
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
+  private_subnets_enabled = false
   node_pools = [
     #    {
     #      "kubernetes_version" : "1.30",

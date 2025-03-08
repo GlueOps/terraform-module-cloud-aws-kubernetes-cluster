@@ -14,13 +14,17 @@ module "subnets" {
 
   vpc_id                  = module.vpc.vpc_id
   igw_id                  = [module.vpc.igw_id]
-  nat_gateway_enabled     = true
+  nat_gateway_enabled     = var.private_subnets_enabled
   nat_instance_enabled    = false
   name                    = "captain"
-  private_subnets_enabled = true
+  private_subnets_enabled = var.private_subnets_enabled
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
+  public_subnets_additional_tags = var.private_subnets_enabled ? { "kubernetes.io/role/elb" = 1 } : {}
+  private_subnets_additional_tags = {
+    "kubernetes.io/role/internal-elb" = 1
+  }
 }
 
 resource "aws_security_group" "captain" {

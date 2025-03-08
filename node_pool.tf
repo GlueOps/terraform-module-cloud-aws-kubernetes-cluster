@@ -6,7 +6,7 @@ module "node_pool" {
   version               = "3.1.1"
   ec2_ssh_key_name      = each.value.ssh_key_pair_names
   instance_types        = [each.value.instance_type]
-  subnet_ids            = module.subnets.public_subnet_ids
+  subnet_ids            = var.private_subnets_enabled ? module.subnets.private_subnet_ids : module.subnets.public_subnet_ids
   desired_size          = each.value.node_count
   min_size              = each.value.node_count
   max_size              = each.value.node_count + 1
