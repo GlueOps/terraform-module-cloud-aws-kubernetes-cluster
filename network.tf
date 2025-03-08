@@ -23,7 +23,7 @@ module "subnets" {
   max_subnet_count        = length(var.availability_zones)
   public_subnets_additional_tags = {
     "kubernetes.io/role/elb" = 1
-    "kubernetes.io/cluster/captain" = "shared"
+    "kubernetes.io/cluster/captain-cluster" = "shared"
 
   }
   private_subnets_additional_tags = {
