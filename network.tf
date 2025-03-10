@@ -18,7 +18,7 @@ module "subnets" {
 
   vpc_id                  = module.vpc.vpc_id
   igw_id                  = [module.vpc.igw_id]
-  cidr_block = "10.65.0.0/26"
+  ipv4_cidr_block         = "10.65.0.0/26"
   nat_gateway_enabled     = false
   nat_instance_enabled    = false
   name                    = "captain"
