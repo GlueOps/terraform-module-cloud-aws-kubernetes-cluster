@@ -145,20 +145,7 @@ variable "private_node_pools" {
     }))
 
   }))
-  default = [{
-    name                = "default-pool"
-    node_count          = 1
-    instance_type       = "t3a.large"
-    ami_release_version = "1.30.9-20250212"
-    kubernetes_version  = "1.30"
-    ami_type            = "AL2_x86_64"
-    spot                = false
-    disk_size_gb        = 20
-    max_pods            = 110
-    ssh_key_pair_names  = []
-    kubernetes_labels   = {}
-    kubernetes_taints   = []
-  }]
+  default = []
   description = <<-DESC
   node pool configurations:
     - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name

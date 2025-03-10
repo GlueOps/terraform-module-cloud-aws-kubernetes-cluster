@@ -6,6 +6,10 @@ module "vpc" {
   name                    = "captain"
 }
 
+resource "aws_vpc_ipv4_cidr_block_association" "secondary_cidr" {
+  vpc_id     = module.vpc.vpc_id
+  cidr_block = "10.66.0.0/26"
+}
 
 module "subnets" {
   source = "cloudposse/dynamic-subnets/aws"
@@ -14,6 +18,7 @@ module "subnets" {
 
   vpc_id                  = module.vpc.vpc_id
   igw_id                  = [module.vpc.igw_id]
+  cidr_block = "10.65.0.0/26"
   nat_gateway_enabled     = false
   nat_instance_enabled    = false
   name                    = "captain"
@@ -40,6 +45,8 @@ module "private-subnets" {
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
+  cidr_block = "10.66.0.0/26"
+
   private_subnets_additional_tags = {
     "kubernetes.io/role/internal-elb" = 1
   }
