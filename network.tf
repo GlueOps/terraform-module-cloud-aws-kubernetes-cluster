@@ -34,7 +34,7 @@ module "private-subnets" {
   nat_instance_enabled    = false
   name                    = "captain-private"
   private_subnets_enabled = true
-  public_subnets_enabled  = false
+  public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
   private_subnets_additional_tags = {
