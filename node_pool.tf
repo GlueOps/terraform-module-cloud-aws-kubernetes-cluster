@@ -6,7 +6,7 @@ module "node_pool" {
   version               = "3.1.1"
   ec2_ssh_key_name      = each.value.ssh_key_pair_names
   instance_types        = [each.value.instance_type]
-  subnet_ids            = module.subnets.public_subnet_ids
+  subnet_ids            = module.subnets.private_subnet_ids
   desired_size          = each.value.node_count
   min_size              = each.value.node_count
   max_size              = each.value.node_count + 1
@@ -16,7 +16,7 @@ module "node_pool" {
   ami_type              = each.value.ami_type
   kubernetes_labels     = each.value.kubernetes_labels
   kubernetes_taints     = each.value.kubernetes_taints
-  create_before_destroy = true
+  create_before_destroy = false
   kubernetes_version    = [each.value.kubernetes_version]
   immediately_apply_lt_changes = true
 
@@ -37,4 +37,9 @@ module "node_pool" {
     "--max-pods=${each.value.max_pods}"
   ]
   associated_security_group_ids = [aws_security_group.captain.id]
+   lifecycle {
+    ignore_changes = [
+      ami_type,
+    ]
+  }
 }
