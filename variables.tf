@@ -125,43 +125,6 @@ variable "node_pools" {
   DESC
 }
 
-variable "private_node_pools" {
-  type = list(object({
-    name                = string
-    node_count          = number
-    instance_type       = string
-    kubernetes_version  = string
-    ami_release_version = string
-    ami_type            = string
-    spot                = bool
-    disk_size_gb        = number
-    max_pods            = number
-    ssh_key_pair_names  = list(string)
-    kubernetes_labels   = map(string)
-    kubernetes_taints = list(object({
-      key    = string
-      value  = string
-      effect = string
-    }))
-
-  }))
-  default = []
-  description = <<-DESC
-  node pool configurations:
-    - name (string): Name of the node pool. MUST BE UNIQUE! Recommended to use YYYYMMDD in the name
-    - node_count (number): number of nodes to create in the node pool.
-    - instance_type (string): Instance type to use for the nodes. ref: https://instances.vantage.sh/
-    - kubernetes_version (string): Generally this is the same version as the EKS cluster. But if doing a node pool upgrade this may be a different version.
-    - ami_release_version (string): AMI Release version to use for EKS worker nodes. ref: https://github.com/awslabs/amazon-eks-ami/releases
-    - ami_type (string): e.g. AMD64 or ARM
-    - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
-    - disk_size_gb (number): Disk size in GB for the nodes.
-    - max_pods (number): max pods that can be scheduled per node.
-    - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
-    - kubernetes_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
-    - kubernetes_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
-  DESC
-}
 
 variable "iam_role_to_assume" {
   type        = string
