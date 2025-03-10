@@ -17,10 +17,29 @@ module "subnets" {
   nat_gateway_enabled     = false
   nat_instance_enabled    = false
   name                    = "captain"
-  private_subnets_enabled = true
+  private_subnets_enabled = false
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
+}
+
+module "subnets" {
+  source = "cloudposse/dynamic-subnets/aws"
+  # Cloud Posse recommends pinning every module to a specific version
+  version = "2.4.2"
+
+  vpc_id                  = module.vpc.vpc_id
+  igw_id                  = [module.vpc.igw_id]
+  nat_gateway_enabled     = true
+  nat_instance_enabled    = false
+  name                    = "captain-private"
+  private_subnets_enabled = true
+  public_subnets_enabled  = false
+  availability_zones      = var.availability_zones
+  max_subnet_count        = length(var.availability_zones)
+  private_subnets_additional_tags = {
+    "kubernetes.io/role/internal-elb" = 1
+  }
 }
 
 resource "aws_security_group" "captain" {
