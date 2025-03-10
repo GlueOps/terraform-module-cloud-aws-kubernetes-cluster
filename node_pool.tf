@@ -18,7 +18,6 @@ module "node_pool" {
   kubernetes_taints     = each.value.kubernetes_taints
   create_before_destroy = false
   kubernetes_version    = [each.value.kubernetes_version]
-  immediately_apply_lt_changes = true
 
   cluster_autoscaler_enabled = false
   name                       = each.value.name
@@ -37,9 +36,4 @@ module "node_pool" {
     "--max-pods=${each.value.max_pods}"
   ]
   associated_security_group_ids = [aws_security_group.captain.id]
-   lifecycle {
-    ignore_changes = [
-      ami_type,
-    ]
-  }
 }

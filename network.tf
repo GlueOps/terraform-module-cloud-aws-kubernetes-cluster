@@ -26,9 +26,6 @@ module "subnets" {
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
-  public_subnets_additional_tags = {
-    "kubernetes.io/role/elb" = 1
-  }
 }
 
 module "private-subnets" {
