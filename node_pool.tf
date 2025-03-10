@@ -16,7 +16,7 @@ module "node_pool" {
   ami_type              = each.value.ami_type
   kubernetes_labels     = each.value.kubernetes_labels
   kubernetes_taints     = each.value.kubernetes_taints
-  create_before_destroy = false
+  create_before_destroy = true
   kubernetes_version    = [each.value.kubernetes_version]
   immediately_apply_lt_changes = true
 
