@@ -23,7 +23,7 @@ module "subnets" {
   max_subnet_count        = length(var.availability_zones)
 }
 
-module "subnets" {
+module "private-subnets" {
   source = "cloudposse/dynamic-subnets/aws"
   # Cloud Posse recommends pinning every module to a specific version
   version = "2.4.2"
