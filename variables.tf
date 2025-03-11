@@ -60,6 +60,11 @@ variable "vpc_cidr_block" {
   description = "The CIDR block for the VPC"
   default     = "10.65.0.0/26"
 }
+variable "secondary_vpc_cidr_block" {
+  type        = string
+  description = "The CIDR block for the VPC"
+  default     = "10.66.0.0/26"
+}
 
 variable "availability_zones" {
   type        = list(string)
@@ -181,6 +186,7 @@ variable "peering_configs" {
 locals {
   vpc = {
     cidr_block = var.vpc_cidr_block
+    secondary_cidr = var.secondary_vpc_cidr_block
   }
 
 }

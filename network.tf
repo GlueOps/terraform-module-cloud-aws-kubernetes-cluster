@@ -8,7 +8,7 @@ module "vpc" {
 
 resource "aws_vpc_ipv4_cidr_block_association" "secondary_cidr" {
   vpc_id     = module.vpc.vpc_id
-  cidr_block = "10.66.0.0/26"
+  cidr_block = local.secondary_vpc.cidr_block
 }
 
 module "subnets" {
@@ -18,7 +18,7 @@ module "subnets" {
 
   vpc_id                  = module.vpc.vpc_id
   igw_id                  = [module.vpc.igw_id]
-  ipv4_cidr_block         = ["10.65.0.0/26"]
+  ipv4_cidr_block         = [local.vpc.cidr_block]
   nat_gateway_enabled     = false
   nat_instance_enabled    = false
   name                    = "captain"
