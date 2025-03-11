@@ -42,7 +42,7 @@ module "private-subnets" {
   public_subnets_enabled  = true
   availability_zones      = var.availability_zones
   max_subnet_count        = length(var.availability_zones)
-  ipv4_cidr_block         = ["10.66.0.0/26"]
+  ipv4_cidr_block         = [local.vpc.secondary_cidr]
 
   private_subnets_additional_tags = {
     "kubernetes.io/role/internal-elb" = 1
