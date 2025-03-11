@@ -8,7 +8,7 @@ module "vpc" {
 
 resource "aws_vpc_ipv4_cidr_block_association" "secondary_cidr" {
   vpc_id     = module.vpc.vpc_id
-  cidr_block = local.secondary_vpc.cidr_block
+  cidr_block = local.vpc.secondary_cidr
 }
 
 module "subnets" {
