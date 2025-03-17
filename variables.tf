@@ -67,6 +67,12 @@ variable "availability_zones" {
   default     = ["us-west-2a", "us-west-2b", "us-west-2c"]
 
 }
+variable "private_subnets_enabled" {
+  type        = bool
+  description = "enable private subnets"
+  default     = false
+
+}
 
 variable "eks_version" {
   type        = string

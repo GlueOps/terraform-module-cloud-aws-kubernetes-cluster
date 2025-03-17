@@ -77,4 +77,5 @@ resource "aws_eks_addon" "kube_proxy" {
 
   depends_on = [module.node_pool]
   count      = length(var.node_pools) > 0 ? 1 : 0
+
 }
