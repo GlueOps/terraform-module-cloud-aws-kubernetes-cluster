@@ -5,7 +5,7 @@ variable "region" {
 
 variable "csi_driver_version" {
   type        = string
-  default     = "v1.39.0-eksbuild.1"
+  default     = "v1.41.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -17,7 +17,7 @@ variable "coredns_version" {
 
 variable "kube_proxy_version" {
   type        = string
-  default     = "v1.30.7-eksbuild.2"
+  default     = "v1.30.9-eksbuild.3"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 

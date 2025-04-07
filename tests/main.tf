@@ -2,9 +2,9 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
   eks_version        = "1.30"
-  csi_driver_version = "v1.39.0-eksbuild.1"
+  csi_driver_version = "v1.41.0-eksbuild.1"
   coredns_version    = "v1.11.4-eksbuild.2"
-  kube_proxy_version = "v1.30.7-eksbuild.2"
+  kube_proxy_version = "v1.30.9-eksbuild.3"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
   availability_zones = ["us-west-2a", "us-west-2b"]
