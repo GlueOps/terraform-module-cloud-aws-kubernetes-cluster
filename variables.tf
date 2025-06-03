@@ -11,13 +11,13 @@ variable "csi_driver_version" {
 
 variable "coredns_version" {
   type        = string
-  default     = "v1.11.4-eksbuild.2"
+  default     = "v1.11.4-eksbuild.10"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
 variable "kube_proxy_version" {
   type        = string
-  default     = "v1.30.9-eksbuild.3"
+  default     = "v1.31.7-eksbuild.7"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -77,7 +77,7 @@ variable "private_subnets_enabled" {
 variable "eks_version" {
   type        = string
   description = "The version of EKS to deploy"
-  default     = "1.30"
+  default     = "1.31"
 }
 
 variable "node_pools" {
@@ -104,8 +104,8 @@ variable "node_pools" {
     name                = "default-pool"
     node_count          = 1
     instance_type       = "t3a.large"
-    ami_release_version = "1.30.11-20250514"
-    kubernetes_version  = "1.30"
+    ami_release_version = "1.31.7-20250514"
+    kubernetes_version  = "1.31"
     ami_type            = "AL2_x86_64"
     spot                = false
     disk_size_gb        = 20
