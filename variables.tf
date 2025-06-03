@@ -11,7 +11,7 @@ variable "csi_driver_version" {
 
 variable "coredns_version" {
   type        = string
-  default     = "v1.11.4-eksbuild.10"
+  default     = "v1.11.4-eksbuild.14"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
