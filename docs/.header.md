@@ -18,8 +18,16 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::1234567890:role/glueops-captain-role"
   source             = "git::https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster.git"
   eks_version        = "1.30"
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.31","addonName":"aws-ebs-csi-driver"}
   csi_driver_version = "v1.43.0-eksbuild.1"
+
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.31","addonName":"coredns"}
   coredns_version    = "v1.11.4-eksbuild.2"
+
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.31","addonName":"kube-proxy"}
   kube_proxy_version = "v1.30.9-eksbuild.3"
   vpc_cidr_block     = "10.65.0.0/26"
   region             = "us-west-2"
