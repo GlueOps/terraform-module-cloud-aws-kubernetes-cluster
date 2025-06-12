@@ -2,12 +2,21 @@ module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
   eks_version        = "1.30"
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"aws-ebs-csi-driver"}
   csi_driver_version = "v1.43.0-eksbuild.1"
-  coredns_version    = "v1.11.4-eksbuild.2"
+
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"coredns"}
+  coredns_version = "v1.11.4-eksbuild.2"
+
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"kube-proxy"}
   kube_proxy_version = "v1.30.9-eksbuild.3"
-  vpc_cidr_block     = "10.65.0.0/26"
-  region             = "us-west-2"
-  availability_zones = ["us-west-2a", "us-west-2b"]
+
+  vpc_cidr_block          = "10.65.0.0/26"
+  region                  = "us-west-2"
+  availability_zones      = ["us-west-2a", "us-west-2b"]
   private_subnets_enabled = false
   node_pools = [
     #    {

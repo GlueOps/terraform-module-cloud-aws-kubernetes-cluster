@@ -4,19 +4,25 @@ variable "region" {
 }
 
 variable "csi_driver_version" {
-  type        = string
+  type = string
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"aws-ebs-csi-driver"}
   default     = "v1.43.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
 variable "coredns_version" {
-  type        = string
+  type = string
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"coredns"}
   default     = "v1.11.4-eksbuild.2"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
 variable "kube_proxy_version" {
-  type        = string
+  type = string
+  # kubernetesVersion and addonName provided
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"kube-proxy"}
   default     = "v1.30.9-eksbuild.3"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
@@ -27,7 +33,7 @@ locals {
   map_csi_addon_node_tolerations = {
     controller = local.nodeselector_and_pod_tolerations
   }
-  
+
   map_csi_default_storage = {
     defaultStorageClass = {
       enabled = true
