@@ -27,12 +27,12 @@ kubectl delete daemonset -n kube-system aws-node
 echo "Install Calico CNI"
 helm repo add projectcalico https://docs.tigera.io/calico/charts
 helm repo update
-helm install calico projectcalico/tigera-operator --version v3.28.2 --namespace tigera-operator -f calico.yaml --create-namespace
+helm install calico projectcalico/tigera-operator --version v3.29.3 --namespace tigera-operator -f calico.yaml --create-namespace
 echo "::endgroup::"
 
 echo "::group::Deploying new Node Pool"
 echo "Deploy node pool"
-sed -i 's/#//g' main.tf
+sed -i 's/    #//g' main.tf
 terraform apply -auto-approve
 echo "Get nodes and pods from kubernetes"
 kubectl get nodes
