@@ -32,7 +32,7 @@ echo "::endgroup::"
 
 echo "::group::Deploying new Node Pool"
 echo "Deploy node pool"
-sed -i 's/#//g' main.tf
+sed -i 's/    #//g' main.tf
 terraform apply -auto-approve
 echo "Get nodes and pods from kubernetes"
 kubectl get nodes
