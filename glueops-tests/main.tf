@@ -12,7 +12,7 @@ module "captain" {
 
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.30","addonName":"kube-proxy"}
-  kube_proxy_version = "v1.30.11-eksbuild.5"
+  kube_proxy_version = "v1.30.13-eksbuild.2"
 
   vpc_cidr_block          = "10.65.0.0/26"
   region                  = "us-west-2"
