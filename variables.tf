@@ -112,7 +112,7 @@ variable "node_pools" {
     instance_type       = "t3a.large"
     ami_release_version = "1.31.7-20250620"
     kubernetes_version  = "1.31"
-    ami_type            = "AL2_x86_64"
+    ami_type            = "AL2023_x86_64_STANDARD"
     spot                = false
     disk_size_gb        = 20
     max_pods            = 110
