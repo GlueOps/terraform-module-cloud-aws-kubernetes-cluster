@@ -1,18 +1,18 @@
 module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
-  eks_version        = "1.31"
+  eks_version        = "1.32"
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.31","addonName":"aws-ebs-csi-driver"}
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"aws-ebs-csi-driver"}
   csi_driver_version = "v1.48.0-eksbuild.2"
 
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.31","addonName":"coredns"}
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"coredns"}
   coredns_version = "v1.11.4-eksbuild.22"
 
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.31","addonName":"kube-proxy"}
-  kube_proxy_version = "v1.31.10-eksbuild.8"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"kube-proxy"}
+  kube_proxy_version = "1.32.7-20250829"
 
   vpc_cidr_block          = "10.65.0.0/26"
   region                  = "us-west-2"
@@ -20,8 +20,8 @@ module "captain" {
   private_subnets_enabled = false
   node_pools = [
     #    {
-    #      "kubernetes_version" : "1.31",
-    #      "ami_release_version" : "1.31.7-20250620",
+    #      "kubernetes_version" : "1.32",
+    #      "ami_release_version" : "1.32.7-20250829",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -42,8 +42,8 @@ module "captain" {
     #      ]
     #    },
     #    {
-    #      "kubernetes_version" : "1.31",
-    #      "ami_release_version" : "1.31.7-20250620",
+    #      "kubernetes_version" : "1.32",
+    #      "ami_release_version" : "1.32.7-20250829",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.small",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -64,8 +64,8 @@ module "captain" {
     #      ]
     #    },
     #    {
-    #      "kubernetes_version" : "1.31",
-    #      "ami_release_version" : "1.31.7-20250620",
+    #      "kubernetes_version" : "1.32",
+    #      "ami_release_version" : "1.32.7-20250829",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",
