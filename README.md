@@ -181,7 +181,7 @@ No requirements.
 | <a name="module_kubernetes"></a> [kubernetes](#module\_kubernetes) | cloudposse/eks-cluster/aws | 3.0.0 |
 | <a name="module_node_pool"></a> [node\_pool](#module\_node\_pool) | cloudposse/eks-node-group/aws | 3.1.1 |
 | <a name="module_subnets"></a> [subnets](#module\_subnets) | cloudposse/dynamic-subnets/aws | 2.4.2 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | cloudposse/vpc/aws | 2.2.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | cloudposse/vpc/aws | 2.3.0 |
 | <a name="module_vpc_peering_accepter_with_routes"></a> [vpc\_peering\_accepter\_with\_routes](#module\_vpc\_peering\_accepter\_with\_routes) | ./modules/vpc_peering_accepter_with_routes | n/a |
 
 ## Resources
