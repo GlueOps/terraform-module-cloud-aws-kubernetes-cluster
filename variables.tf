@@ -15,7 +15,7 @@ variable "coredns_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"coredns"}
-  default     = "v1.11.4-eksbuild.22"
+  default     = "v1.11.4-eksbuild.24"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
