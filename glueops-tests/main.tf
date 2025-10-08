@@ -8,7 +8,7 @@ module "captain" {
 
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"coredns"}
-  coredns_version = "v1.11.4-eksbuild.22"
+  coredns_version = "v1.11.4-eksbuild.24"
 
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"kube-proxy"}
