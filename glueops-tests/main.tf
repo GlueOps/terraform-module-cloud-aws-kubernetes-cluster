@@ -4,7 +4,7 @@ module "captain" {
   eks_version        = "1.32"
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"aws-ebs-csi-driver"}
-  csi_driver_version = "v1.48.0-eksbuild.2"
+  csi_driver_version = "v1.49.0-eksbuild.1"
 
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"coredns"}
@@ -21,7 +21,7 @@ module "captain" {
   node_pools = [
     #    {
     #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.7-20250829",
+    #      "ami_release_version" : "1.32.9-20251002",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -43,7 +43,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.7-20250829",
+    #      "ami_release_version" : "1.32.9-20251002",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.xlarge",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -65,7 +65,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.7-20250829",
+    #      "ami_release_version" : "1.32.9-20251002",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",
