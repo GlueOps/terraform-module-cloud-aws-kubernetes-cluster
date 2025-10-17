@@ -24,7 +24,7 @@ jobs:
     - name: Setup Codespace Container
       run: |
         echo "::group::Setup Codespace Container"
-        docker run -d -v $(pwd):/app --workdir /app/glueops-tests --rm --name codespaces ghcr.io/glueops/codespaces:v0.109.0 sleep infinity
+        docker run -d -v $(pwd):/app --workdir /app/glueops-tests --rm --name codespaces ghcr.io/glueops/codespaces:v0.110.0 sleep infinity
         echo "::endgroup::"
 
     - name: Running AWS Regression Suite
