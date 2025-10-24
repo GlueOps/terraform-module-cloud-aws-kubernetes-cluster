@@ -23,7 +23,7 @@ variable "kube_proxy_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"kube-proxy"}
-  default     = "v1.32.6-eksbuild.12"
+  default     = "v1.32.6-eksbuild.13"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -110,7 +110,7 @@ variable "node_pools" {
     name                = "default-pool"
     node_count          = 1
     instance_type       = "t3a.large"
-    ami_release_version = "1.32.9-20251002"
+    ami_release_version = "1.32.9-20251016"
     kubernetes_version  = "1.32"
     ami_type            = "AL2023_x86_64_STANDARD"
     spot                = false
