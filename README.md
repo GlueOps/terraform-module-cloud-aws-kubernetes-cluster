@@ -60,7 +60,7 @@ module "captain" {
 #      "kubernetes_version" : "1.32",
 #      "ami_release_version" : "1.32.9-20251016",
 #      "ami_type" : "AL2023_x86_64_STANDARD",
-#      "instance_type" : "t3a.xlarge",
+#      "instance_type" : "t3a.medium",
 #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
 #      "node_count" : 2,
 #      "spot" : false,
