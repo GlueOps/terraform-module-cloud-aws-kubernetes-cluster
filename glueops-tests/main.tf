@@ -12,7 +12,7 @@ module "captain" {
 
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"kube-proxy"}
-  kube_proxy_version = "v1.32.6-eksbuild.12"
+  kube_proxy_version = "v1.32.6-eksbuild.13"
 
   vpc_cidr_block          = "10.65.0.0/26"
   region                  = "us-west-2"
@@ -21,7 +21,7 @@ module "captain" {
   node_pools = [
     #    {
     #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.9-20251002",
+    #      "ami_release_version" : "1.32.9-20251016",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -43,9 +43,9 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.9-20251002",
+    #      "ami_release_version" : "1.32.9-20251016",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
-    #      "instance_type" : "t3a.xlarge",
+    #      "instance_type" : "t3a.medium",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
     #      "node_count" : 2,
     #      "spot" : false,
@@ -65,7 +65,7 @@ module "captain" {
     #    },
     #    {
     #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.9-20251002",
+    #      "ami_release_version" : "1.32.9-20251016",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",
