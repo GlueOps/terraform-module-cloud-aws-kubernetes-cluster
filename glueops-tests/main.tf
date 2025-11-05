@@ -77,5 +77,6 @@ module "captain" {
     #      "kubernetes_labels" : {},
     #      "kubernetes_taints" : []
     #    }
-  ]
+  ],
+   peering_configs = []
 }
