@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-AWS_NUKE_VERSION=v3.60.0
+AWS_NUKE_VERSION=v3.61.0
 # reference: https://github.com/GlueOps/scripts-teardown-aws-amazon-web-services
 echo "Preform an AWS Cleanup with AWS Nuke"
 wget https://github.com/ekristen/aws-nuke/releases/download/$AWS_NUKE_VERSION/aws-nuke-$AWS_NUKE_VERSION-linux-amd64.tar.gz && tar -xvf aws-nuke-$AWS_NUKE_VERSION-linux-amd64.tar.gz && rm aws-nuke-$AWS_NUKE_VERSION-linux-amd64.tar.gz
