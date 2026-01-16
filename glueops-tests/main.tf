@@ -1,18 +1,18 @@
 module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
-  eks_version        = "1.32"
+  eks_version        = "1.33"
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"aws-ebs-csi-driver"}
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.33","addonName":"aws-ebs-csi-driver"}
   csi_driver_version = "v1.54.0-eksbuild.1"
 
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"coredns"}
-  coredns_version = "v1.11.4-eksbuild.24"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.33","addonName":"coredns"}
+  coredns_version = "v1.12.4-eksbuild.1"
 
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.32","addonName":"kube-proxy"}
-  kube_proxy_version = "v1.32.9-eksbuild.2"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.33","addonName":"kube-proxy"}
+  kube_proxy_version = "v1.33.5-eksbuild.2"
 
   vpc_cidr_block          = "10.65.0.0/26"
   region                  = "us-west-2"
@@ -20,8 +20,8 @@ module "captain" {
   private_subnets_enabled = false
   node_pools = [
     #    {
-    #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.9-20251120",
+    #      "kubernetes_version" : "1.33",
+    #      "ami_release_version" : "1.33.5-20251217",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -42,8 +42,8 @@ module "captain" {
     #      ]
     #    },
     #    {
-    #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.9-20251120",
+    #      "kubernetes_version" : "1.33",
+    #      "ami_release_version" : "1.33.5-20251217",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -64,8 +64,8 @@ module "captain" {
     #      ]
     #    },
     #    {
-    #      "kubernetes_version" : "1.32",
-    #      "ami_release_version" : "1.32.9-20251120",
+    #      "kubernetes_version" : "1.33",
+    #      "ami_release_version" : "1.33.5-20251217",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",
