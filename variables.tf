@@ -7,7 +7,7 @@ variable "csi_driver_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.33","addonName":"aws-ebs-csi-driver"}
-  default     = "v1.54.0-eksbuild.1"
+  default     = "v1.55.0-eksbuild.2"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
