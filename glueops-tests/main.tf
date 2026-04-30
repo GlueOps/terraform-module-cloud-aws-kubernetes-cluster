@@ -4,7 +4,7 @@ module "captain" {
   eks_version        = "1.34"
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  csi_driver_version = "v1.56.0-eksbuild.1"
+  csi_driver_version = "v1.59.0-eksbuild.1"
 
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"coredns"}
