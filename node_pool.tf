@@ -19,6 +19,10 @@ module "node_pool" {
   create_before_destroy = false
   kubernetes_version    = [each.value.kubernetes_version]
 
+  node_role_policy_arns = each.value.enable_ssm ? ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"] : []
+
+  before_cluster_joining_userdata = each.value.enable_cve_2026_31431_mitigation ? [local.cve_2026_31431_userdata] : []
+
   cluster_autoscaler_enabled = false
   name                       = each.value.name
   # Ensure the cluster is fully created before trying to add the node group

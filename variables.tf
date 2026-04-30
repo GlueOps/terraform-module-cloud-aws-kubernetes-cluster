@@ -88,17 +88,19 @@ variable "eks_version" {
 
 variable "node_pools" {
   type = list(object({
-    name                = string
-    node_count          = number
-    instance_type       = string
-    kubernetes_version  = string
-    ami_release_version = string
-    ami_type            = string
-    spot                = bool
-    disk_size_gb        = number
-    max_pods            = number
-    ssh_key_pair_names  = list(string)
-    kubernetes_labels   = map(string)
+    name                             = string
+    node_count                       = number
+    instance_type                    = string
+    kubernetes_version               = string
+    ami_release_version              = string
+    ami_type                         = string
+    spot                             = bool
+    disk_size_gb                     = number
+    max_pods                         = number
+    enable_ssm                       = bool
+    enable_cve_2026_31431_mitigation = bool
+    ssh_key_pair_names               = list(string)
+    kubernetes_labels                = map(string)
     kubernetes_taints = list(object({
       key    = string
       value  = string
@@ -107,18 +109,20 @@ variable "node_pools" {
 
   }))
   default = [{
-    name                = "default-pool"
-    node_count          = 1
-    instance_type       = "t3a.large"
-    ami_release_version = "1.34.4-20260224"
-    kubernetes_version  = "1.34"
-    ami_type            = "AL2023_x86_64_STANDARD"
-    spot                = false
-    disk_size_gb        = 20
-    max_pods            = 110
-    ssh_key_pair_names  = []
-    kubernetes_labels   = {}
-    kubernetes_taints   = []
+    name                             = "default-pool"
+    node_count                       = 1
+    instance_type                    = "t3a.large"
+    ami_release_version              = "1.34.4-20260224"
+    kubernetes_version               = "1.34"
+    ami_type                         = "AL2023_x86_64_STANDARD"
+    spot                             = false
+    disk_size_gb                     = 20
+    max_pods                         = 110
+    enable_ssm                       = false
+    enable_cve_2026_31431_mitigation = false
+    ssh_key_pair_names               = []
+    kubernetes_labels                = {}
+    kubernetes_taints                = []
   }]
   description = <<-DESC
   node pool configurations:
@@ -157,3 +161,13 @@ locals {
   }
 
 }
+
+
+locals {
+  cve_2026_31431_userdata = <<-EOT
+    # CVE-2026-31431 ("Copy Fail") mitigation
+    echo "install algif_aead /bin/false" > /etc/modprobe.d/disable-algif.conf
+    rmmod algif_aead 2>/dev/null || true
+  EOT
+}
+
