@@ -97,8 +97,8 @@ variable "node_pools" {
     spot                             = bool
     disk_size_gb                     = number
     max_pods                         = number
-    enable_ssm                       = false
-    enable_cve_2026_31431_mitigation = false
+    enable_ssm                       = bool
+    enable_cve_2026_31431_mitigation = bool
     ssh_key_pair_names               = list(string)
     kubernetes_labels                = map(string)
     kubernetes_taints = list(object({
