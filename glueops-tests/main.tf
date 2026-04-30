@@ -29,8 +29,8 @@ module "captain" {
     #      "spot" : false,
     #      "disk_size_gb" : 20,
     #      "max_pods" : 110,
-    #      "enable_ssm" : true
-    #      "enable_cve_2026_31431_mitigation" : true
+    #      "enable_ssm" : true,
+    #      "enable_cve_2026_31431_mitigation" : true,
     #      "ssh_key_pair_names" : [],
     #      "kubernetes_labels" : {
     #        "glueops.dev/role" : "glueops-platform"
@@ -53,8 +53,8 @@ module "captain" {
     #      "spot" : false,
     #      "disk_size_gb" : 20,
     #      "max_pods" : 110,
-    #      "enable_ssm" : true
-    #      "enable_cve_2026_31431_mitigation" : true
+    #      "enable_ssm" : true,
+    #      "enable_cve_2026_31431_mitigation" : true,
     #      "ssh_key_pair_names" : [],
     #      "kubernetes_labels" : {
     #        "glueops.dev/role" : "glueops-platform-argocd-app-controller"
@@ -77,8 +77,8 @@ module "captain" {
     #      "spot" : false,
     #      "disk_size_gb" : 20,
     #      "max_pods" : 110,
-    #      "enable_ssm" : true
-    #      "enable_cve_2026_31431_mitigation" : true
+    #      "enable_ssm" : true,
+    #      "enable_cve_2026_31431_mitigation" : true,
     #      "ssh_key_pair_names" : [],
     #      "kubernetes_labels" : {},
     #      "kubernetes_taints" : []
