@@ -135,6 +135,8 @@ variable "node_pools" {
     - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
     - disk_size_gb (number): Disk size in GB for the nodes.
     - max_pods (number): max pods that can be scheduled per node.
+    - enable_ssm (bool): enable AWS SSM access
+    - enable_cve_2026_31431_mitigation (bool): enable mitigation for CVE-2026-31431 (Copy Fail) Toolkit
     - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
     - kubernetes_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     - kubernetes_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
