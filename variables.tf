@@ -112,7 +112,7 @@ variable "node_pools" {
     name                             = "default-pool"
     node_count                       = 1
     instance_type                    = "t3a.large"
-    ami_release_version              = "1.34.4-20260224"
+    ami_release_version              = "1.34.6-20260415"
     kubernetes_version               = "1.34"
     ami_type                         = "AL2023_x86_64_STANDARD"
     spot                             = false
