@@ -7,7 +7,7 @@ variable "csi_driver_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  default     = "v1.56.0-eksbuild.1"
+  default     = "v1.59.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -15,7 +15,7 @@ variable "coredns_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"coredns"}
-  default     = "v1.13.2-eksbuild.1"
+  default     = "v1.13.2-eksbuild.7"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
@@ -23,7 +23,7 @@ variable "kube_proxy_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"kube-proxy"}
-  default     = "v1.34.3-eksbuild.2"
+  default     = "v1.34.6-eksbuild.5"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -88,17 +88,19 @@ variable "eks_version" {
 
 variable "node_pools" {
   type = list(object({
-    name                = string
-    node_count          = number
-    instance_type       = string
-    kubernetes_version  = string
-    ami_release_version = string
-    ami_type            = string
-    spot                = bool
-    disk_size_gb        = number
-    max_pods            = number
-    ssh_key_pair_names  = list(string)
-    kubernetes_labels   = map(string)
+    name                             = string
+    node_count                       = number
+    instance_type                    = string
+    kubernetes_version               = string
+    ami_release_version              = string
+    ami_type                         = string
+    spot                             = bool
+    disk_size_gb                     = number
+    max_pods                         = number
+    enable_ssm                       = bool
+    enable_cve_2026_31431_mitigation = bool
+    ssh_key_pair_names               = list(string)
+    kubernetes_labels                = map(string)
     kubernetes_taints = list(object({
       key    = string
       value  = string
@@ -107,18 +109,20 @@ variable "node_pools" {
 
   }))
   default = [{
-    name                = "default-pool"
-    node_count          = 1
-    instance_type       = "t3a.large"
-    ami_release_version = "1.34.4-20260224"
-    kubernetes_version  = "1.34"
-    ami_type            = "AL2023_x86_64_STANDARD"
-    spot                = false
-    disk_size_gb        = 20
-    max_pods            = 110
-    ssh_key_pair_names  = []
-    kubernetes_labels   = {}
-    kubernetes_taints   = []
+    name                             = "default-pool"
+    node_count                       = 1
+    instance_type                    = "t3a.large"
+    ami_release_version              = "1.34.6-20260415"
+    kubernetes_version               = "1.34"
+    ami_type                         = "AL2023_x86_64_STANDARD"
+    spot                             = false
+    disk_size_gb                     = 20
+    max_pods                         = 110
+    enable_ssm                       = false
+    enable_cve_2026_31431_mitigation = false
+    ssh_key_pair_names               = []
+    kubernetes_labels                = {}
+    kubernetes_taints                = []
   }]
   description = <<-DESC
   node pool configurations:
@@ -131,6 +135,8 @@ variable "node_pools" {
     - spot (bool): Enable spot instances for the nodes. DO NOT ENABLE IN PROD!
     - disk_size_gb (number): Disk size in GB for the nodes.
     - max_pods (number): max pods that can be scheduled per node.
+    - enable_ssm (bool): enable AWS SSM access
+    - enable_cve_2026_31431_mitigation (bool): enable mitigation for CVE-2026-31431 (Copy Fail) Toolkit
     - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
     - kubernetes_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     - kubernetes_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
@@ -157,3 +163,13 @@ locals {
   }
 
 }
+
+
+locals {
+  cve_2026_31431_userdata = <<-EOT
+    # CVE-2026-31431 ("Copy Fail") mitigation
+    echo "install algif_aead /bin/false" > /etc/modprobe.d/disable-algif.conf
+    rmmod algif_aead 2>/dev/null || true
+  EOT
+}
+
