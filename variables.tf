@@ -15,7 +15,7 @@ variable "coredns_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"coredns"}
-  default     = "v1.13.2-eksbuild.10"
+  default     = "v1.13.2-eksbuild.7"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
@@ -23,7 +23,7 @@ variable "kube_proxy_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"kube-proxy"}
-  default     = "v1.34.6-eksbuild.11"
+  default     = "v1.34.6-eksbuild.5"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
