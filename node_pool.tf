@@ -33,7 +33,7 @@ module "node_pool" {
       "device_name" : "/dev/xvda",
       "encrypted" : true,
       "volume_size" : each.value.disk_size_gb,
-      "volume_type" : "gp2"
+      "volume_type" : each.value.enable_gp3_volumes ? "gp3" : "gp2"
     }
   ]
   kubelet_additional_options = [
