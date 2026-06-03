@@ -7,7 +7,7 @@ variable "csi_driver_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  default     = "v1.59.0-eksbuild.1"
+  default     = "v1.60.1-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -99,6 +99,7 @@ variable "node_pools" {
     max_pods                         = number
     enable_ssm                       = bool
     enable_cve_2026_31431_mitigation = bool
+    enable_gp3_volumes               = bool
     ssh_key_pair_names               = list(string)
     kubernetes_labels                = map(string)
     kubernetes_taints = list(object({
@@ -112,7 +113,7 @@ variable "node_pools" {
     name                             = "default-pool"
     node_count                       = 1
     instance_type                    = "t3a.large"
-    ami_release_version              = "1.34.6-20260415"
+    ami_release_version              = "1.34.8-20260527"
     kubernetes_version               = "1.34"
     ami_type                         = "AL2023_x86_64_STANDARD"
     spot                             = false
@@ -120,6 +121,7 @@ variable "node_pools" {
     max_pods                         = 110
     enable_ssm                       = false
     enable_cve_2026_31431_mitigation = false
+    enable_gp3_volumes               = false
     ssh_key_pair_names               = []
     kubernetes_labels                = {}
     kubernetes_taints                = []
@@ -137,6 +139,7 @@ variable "node_pools" {
     - max_pods (number): max pods that can be scheduled per node.
     - enable_ssm (bool): enable AWS SSM access
     - enable_cve_2026_31431_mitigation (bool): enable mitigation for CVE-2026-31431 (Copy Fail) Toolkit
+    - enable_gp3_volumes (bool): enable gp3 storage otherwise use gp2 storage
     - ssh_key_pair_names (list(string)): List of SSH key pair names to associate with the nodes. ref: https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#KeyPairs:
     - kubernetes_labels (map(string)): Map of labels to apply to the nodes. ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
     - kubernetes_taints (list(object)): List of taints to apply to the nodes. ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
