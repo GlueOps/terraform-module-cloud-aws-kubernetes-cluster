@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.51.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.50.0...v0.51.0) (2026-07-10)
+
+
+### Features
+
+* update glueops/codespaces to v0.146.0 #minor ([#406](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/406)) ([ad8cd14](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/ad8cd143d4d2be221f5d060061d8ef449b357e8d))
+
+
+### Miscellaneous Chores
+
+* **fallback:** update docker/setup-buildx-action ([#405](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/405)) ([10fb35d](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/10fb35d021c80196b5e66070db563f6a06e0d4ce))
+
 ## [0.50.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.49.0...v0.50.0) (2026-07-02)
 
 
