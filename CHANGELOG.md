@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.51.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.50.0...v0.51.0) (2026-08-07)
+
+
+### Features
+
+* update eks versions ([#421](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/421)) ([061314f](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/061314fd58a27579fd17ea7db9d3726e9a649bb2))
+* update glueops/codespaces to v0.146.0 #minor ([#406](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/406)) ([ad8cd14](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/ad8cd143d4d2be221f5d060061d8ef449b357e8d))
+* update glueops/codespaces to v0.155.1 #minor ([#420](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/420)) ([07835cc](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/07835ccb1607853d7c6701a5745a052ee4c4d6c2))
+
+
+### Miscellaneous Chores
+
+* add Apache-2.0 LICENSE ([#419](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/419)) ([b8d4739](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/b8d4739ce21c2e4998fd4c1a626729cd2e5edeb0))
+* **fallback:** update actions/checkout ([#412](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/412)) ([9e1cd45](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/9e1cd453cc49612da0962ce94ef9dedba7cc2901))
+* **fallback:** update docker/setup-buildx-action ([#405](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/405)) ([10fb35d](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/10fb35d021c80196b5e66070db563f6a06e0d4ce))
+
 ## [0.50.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.49.0...v0.50.0) (2026-07-02)
 
 
