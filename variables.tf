@@ -7,7 +7,7 @@ variable "csi_driver_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  default     = "v1.62.0-eksbuild.1"
+  default     = "v1.63.1-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -113,7 +113,7 @@ variable "node_pools" {
     name                             = "default-pool"
     node_count                       = 1
     instance_type                    = "t3a.large"
-    ami_release_version              = "1.34.9-20260618"
+    ami_release_version              = "1.34.9-20260801"
     kubernetes_version               = "1.34"
     ami_type                         = "AL2023_x86_64_STANDARD"
     spot                             = false
