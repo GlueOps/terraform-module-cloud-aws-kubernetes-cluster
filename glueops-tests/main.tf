@@ -1,18 +1,18 @@
 module "captain" {
   iam_role_to_assume = "arn:aws:iam::761182885829:role/glueops-captain-role"
   source             = "../"
-  eks_version        = "1.34"
+  eks_version        = "1.35"
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  csi_driver_version = "v1.63.1-eksbuild.1"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"aws-ebs-csi-driver"}
+  csi_driver_version = "v1.66.0-eksbuild.1"
 
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"coredns"}
-  coredns_version = "v1.13.2-eksbuild.11"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"coredns"}
+  coredns_version = "v1.14.3-eksbuild.16"
 
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"kube-proxy"}
-  kube_proxy_version = "v1.34.6-eksbuild.13"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"kube-proxy"}
+  kube_proxy_version = "v1.35.3-eksbuild.25"
 
   vpc_cidr_block          = "10.65.0.0/26"
   region                  = "us-west-2"
@@ -20,8 +20,8 @@ module "captain" {
   private_subnets_enabled = false
   node_pools = [
     #    {
-    #      "kubernetes_version" : "1.34",
-    #      "ami_release_version" : "1.34.9-20260801",
+    #      "kubernetes_version" : "1.35",
+    #      "ami_release_version" : "1.35.7-20260827",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.large",
     #      "name" : "glueops-platform-node-pool-1",
@@ -45,8 +45,8 @@ module "captain" {
     #      ]
     #    },
     #    {
-    #      "kubernetes_version" : "1.34",
-    #      "ami_release_version" : "1.34.9-20260801",
+    #      "kubernetes_version" : "1.35",
+    #      "ami_release_version" : "1.35.7-20260827",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "glueops-platform-node-pool-argocd-app-controller-1",
@@ -70,8 +70,8 @@ module "captain" {
     #      ]
     #    },
     #    {
-    #      "kubernetes_version" : "1.34",
-    #      "ami_release_version" : "1.34.9-20260801",
+    #      "kubernetes_version" : "1.35",
+    #      "ami_release_version" : "1.35.7-20260827",
     #      "ami_type" : "AL2023_x86_64_STANDARD",
     #      "instance_type" : "t3a.medium",
     #      "name" : "clusterwide-node-pool-1",
