@@ -6,24 +6,24 @@ variable "region" {
 variable "csi_driver_version" {
   type = string
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  default     = "v1.63.1-eksbuild.1"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"aws-ebs-csi-driver"}
+  default     = "v1.66.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
 variable "coredns_version" {
   type = string
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"coredns"}
-  default     = "v1.13.2-eksbuild.11"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"coredns"}
+  default     = "v1.14.3-eksbuild.16"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
 variable "kube_proxy_version" {
   type = string
   # kubernetesVersion and addonName provided
-  # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"kube-proxy"}
-  default     = "v1.34.6-eksbuild.13"
+  # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"kube-proxy"}
+  default     = "v1.35.3-eksbuild.25"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -83,7 +83,7 @@ variable "private_subnets_enabled" {
 variable "eks_version" {
   type        = string
   description = "The version of EKS to deploy"
-  default     = "1.34"
+  default     = "1.35"
 }
 
 variable "node_pools" {
@@ -114,7 +114,7 @@ variable "node_pools" {
     node_count                       = 1
     instance_type                    = "t3a.large"
     ami_release_version              = "1.34.9-20260801"
-    kubernetes_version               = "1.34"
+    kubernetes_version               = "1.35"
     ami_type                         = "AL2023_x86_64_STANDARD"
     spot                             = false
     disk_size_gb                     = 20
