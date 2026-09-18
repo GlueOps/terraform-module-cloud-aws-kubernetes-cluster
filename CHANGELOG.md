@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.51.0...v0.52.0) (2026-09-18)
+
+
+### Features
+
+* update versions (tenatively last update before 1.35) ([#433](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/433)) ([650340f](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/650340f66d64690724ec23fb53431193e8bc799a))
+
 ## [0.51.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.50.0...v0.51.0) (2026-08-07)
 
 
