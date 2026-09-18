@@ -7,7 +7,7 @@ variable "csi_driver_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"aws-ebs-csi-driver"}
-  default     = "v1.63.1-eksbuild.1"
+  default     = "v1.66.0-eksbuild.1"
   description = "You should grab the appropriate version number from: https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/CHANGELOG.md"
 }
 
@@ -15,7 +15,7 @@ variable "coredns_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"coredns"}
-  default     = "v1.13.2-eksbuild.11"
+  default     = "v1.13.2-eksbuild.24"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-coredns.html"
 }
 
@@ -23,7 +23,7 @@ variable "kube_proxy_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.34","addonName":"kube-proxy"}
-  default     = "v1.34.6-eksbuild.13"
+  default     = "v1.34.6-eksbuild.25"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
@@ -113,7 +113,7 @@ variable "node_pools" {
     name                             = "default-pool"
     node_count                       = 1
     instance_type                    = "t3a.large"
-    ami_release_version              = "1.34.9-20260801"
+    ami_release_version              = "1.34.11-20260917"
     kubernetes_version               = "1.34"
     ami_type                         = "AL2023_x86_64_STANDARD"
     spot                             = false
