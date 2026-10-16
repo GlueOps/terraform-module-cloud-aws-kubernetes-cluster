@@ -24,6 +24,13 @@ presets:
       - "glueops-deployment-svc -> AdministratorAccess" # Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called
       IAMUserAccessKey:
       - "glueops-deployment-svc -> AKIA3COQJC7C2PNUKZV4" #Update `glueops-deployment-svc-account-name` to whatever your IAM user you created is called AND change `ABCDEFGHIJKLMNOPQRST` to whatever the AccessKey ID actually is from when you created it.
+      # AWS-managed defaults (e.g. default.iam-user); the ElastiCache API rejects dotted IDs so they can never be deleted
+      ElasticacheUser:
+      - type: regex
+        value: '^default\..*'
+      ElasticacheUserGroup:
+      - type: regex
+        value: '^default\..*'
 
 resource-types:
   excludes:
