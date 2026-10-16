@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.1](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.53.0...v0.53.1) (2026-10-16)
+
+
+### Bug Fixes
+
+* nuke.yaml logic ([#439](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/439)) ([991e307](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/991e307c1a2d2ad98dec419eefc96b79d5ad41ef))
+
 ## [0.53.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.52.0...v0.53.0) (2026-10-16)
 
 
