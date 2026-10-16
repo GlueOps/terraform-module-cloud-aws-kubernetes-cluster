@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.52.0...v0.53.0) (2026-10-16)
+
+
+### Features
+
+* update eks and addons versions to be compatible 1.35 ([#431](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/431)) ([80455a5](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/80455a596a4aa294a39e067fb3357a14352b6a7f))
+
 ## [0.52.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.51.0...v0.52.0) (2026-09-18)
 
 
