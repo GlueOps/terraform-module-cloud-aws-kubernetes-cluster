@@ -23,7 +23,7 @@ variable "kube_proxy_version" {
   type = string
   # kubernetesVersion and addonName provided
   # renovate: eksAddonsFilter={"kubernetesVersion":"1.35","addonName":"kube-proxy"}
-  default     = "v1.35.3-eksbuild.25"
+  default     = "v1.35.3-eksbuild.62"
   description = "You should grab the appropriate version number from: https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html"
 }
 
