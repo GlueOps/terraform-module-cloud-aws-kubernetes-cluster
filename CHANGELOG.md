@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.54.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.53.0...v0.54.0) (2026-11-02)
+
+
+### Features
+
+* **deps:** update dependency aws-ebs-csi-driver to v1.67.2-eksbuild.1 ([#444](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/444)) ([51cc496](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/51cc49653bfb239ed632c8b33f5aff4f29cc0369))
+* **deps:** update dependency glueops/codespaces to v0.163.0 ([#446](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/446)) ([f64facd](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/f64facd518fadf57e55697d329d5a91d2600053e))
+* update ami versions ([#445](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/445)) ([44b491b](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/44b491b8f698af9c61f2b0029917b5d077b6eb39))
+
+
+### Bug Fixes
+
+* nuke.yaml logic ([#439](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/439)) ([991e307](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/991e307c1a2d2ad98dec419eefc96b79d5ad41ef))
+
+
+### Dependencies
+
+* update dependency coredns to v1.14.7-eksbuild.22 ([#442](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/442)) ([87e5324](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/87e53241d14b490d77d4627df3a004ca9f60b051))
+* update dependency kube-proxy to v1.35.3-eksbuild.62 ([#443](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/443)) ([aa588b1](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/aa588b17f87c9471360af8aba2375f660c0660d2))
+* update docker/setup-buildx-action digest to f87e599 ([#437](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/437)) ([e2e5071](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/e2e50715a95b39d22ca3d07ef07da16468b2aa71))
+
 ## [0.53.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.52.0...v0.53.0) (2026-10-16)
 
 
