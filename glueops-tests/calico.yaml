@@ -44,4 +44,4 @@ tigeraOperator:
   registry: quay.io
 calicoctl:
   image: docker.io/calico/ctl
-  tag: v3.31.4
+  tag: v3.32.3@sha256:e57954691745cb278d6e709d30a7ead6a3400c9e19271913804324ef41178640
