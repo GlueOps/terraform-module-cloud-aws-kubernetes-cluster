@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.55.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.54.0...v0.55.0) (2026-11-03)
+
+
+### Features
+
+* **deps:** update dependency glueops/codespaces to v0.164.0 ([#447](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/issues/447)) ([c6d8b89](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/commit/c6d8b8908de9a165b4d01247e1d5977e411779df))
+
 ## [0.54.0](https://github.com/GlueOps/terraform-module-cloud-aws-kubernetes-cluster/compare/v0.53.0...v0.54.0) (2026-11-02)
 
 
